@@ -18,3 +18,4 @@ while running:
     canvas.fill((0, 180, 240))
     window.blit(canvas, (0, 0))
     pygame.display.update()
+    
