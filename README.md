@@ -8,9 +8,9 @@
 
 **Requirements.txt**
 
-This fils is only there for PyCharm in order to simplify the installation of the PyGame module :)
+This fils is only there for [PyCharm](https://www.jetbrains.com/fr-fr/pycharm/) in order to simplify the installation of the [PyGame](https://www.pygame.org/news) module :)
 
-**Support OS**
+**Python Support**
 
 | Version | State         |
 |      --:|:--            |
