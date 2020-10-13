@@ -1,21 +1,21 @@
-#Don't keep calm, Just give up !
+# Don't keep calm, Just give up !
 
 ## Cahier des charges (à completer)
 
-###Language : 
+### Language : 
 * Python 
 
-###Modules :
+### Modules :
 - [x] PyGame
 * Plus (à voir au fur a mesure du développement et a ajouter dans requirements.txt)
  
-###Style de jeu : 
+### Style de jeu : 
 Jeu style *Give UP* : **Die & Retry** 
 
-###Contrôles : 
-- [x] Clavier 
+### Contrôles : 
+- [ ] Clavier 
 
-###Contenu : 
+### Contenu : 
 - Niveau 1 :
   - [ ] Room 1
   - [ ] Room 2
@@ -28,7 +28,7 @@ Jeu style *Give UP* : **Die & Retry**
   - [ ] Room 9
   - [ ] Room 10
 
-###Objets : 
+### Objets : 
 - Personnage
 - Limites de jeu (Bordures de fenêtre)
 - Blocs **Immobiles**
@@ -36,7 +36,7 @@ Jeu style *Give UP* : **Die & Retry**
 - Pics (ou quelque chose ou tu te fais mal si tu reste dessus genre des ronces)
 - Arbalète / tourelle (ou quelque chose qui te suis du regard en voulant te tuer) 
 
-###Évolutions a venir si le projet arrive a ses fins :
+### Évolutions a venir si le projet arrive a ses fins :
 - Niveau 1 :
   - [ ] Room 11
   - [ ] Room 12
@@ -49,7 +49,7 @@ Jeu style *Give UP* : **Die & Retry**
   - [ ] Room 19
   - [ ] Room 20
 
-###Répartition des tâches:
+### Répartition des tâches:
 - Lena S : 
     - Design des niveaux
     - Animation 
