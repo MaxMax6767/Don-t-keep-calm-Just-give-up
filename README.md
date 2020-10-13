@@ -12,10 +12,9 @@ This fils is only there for PyCharm in order to simplify the installation of the
 
 **Support OS**
 
-| OS      | State         |
+| Version | State         |
 |      --:|:--            |
-| Windows | Supported     |
-| MacOS   | Supported     |
-| Linux   | Supported     |
-| Android | Not Supported |
-| IOS     | Not Supported |
+| 3.9     | Supported     |
+| 3.8     | Supported     |
+| 3.7     | Supported     |
+| < 3.7   | Not Tested    |
