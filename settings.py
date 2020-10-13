@@ -32,12 +32,3 @@ def FPS():
     """
     frameRate = settings["frameRate"]
     return frameRate
-
-
-def screen():
-    """
-    Will take the display number (in case you have multiple screens) value from a Json file (for ease of use)
-    :return:
-    """
-    displayNumber = settings["displayNumber"]
-    return displayNumber
