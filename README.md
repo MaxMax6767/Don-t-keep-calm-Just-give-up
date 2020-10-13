@@ -1,7 +1,8 @@
 # Don't keep calm, Just give up !
 
-**Collaborators :**
-- Maxime G.
-- Corentin P.
-- Lena S.
-- Matteo M.
+## Max's Branch 
+
+### Current test :
+
+ - [ ] Making a working Json config file.
+ 
