@@ -57,6 +57,7 @@ bullet = Bullet(120)
 while launched:
 
     while play == True:
+        #put images on the screen
         screen.blit(background, (0, 0))
         screen.blit(player.image, player.rect)
         screen.blit(gun.image, gun.rect)
@@ -153,11 +154,6 @@ while launched:
             # Creates a list for player inputs
             if event.type == pygame.KEYDOWN:
                 player.pressed[event.key] = True
-
-                """if event.key == pygame.K_UP and player.rect.y-50>0:
-                    if not player.rect.colliderect(pygame.Rect(200, 178, 350, 1)):
-                        for i in range(10):
-                            flying = player.MoveUp()"""
 
             # If there's no new input, empty the list
             elif event.type == pygame.KEYUP:
