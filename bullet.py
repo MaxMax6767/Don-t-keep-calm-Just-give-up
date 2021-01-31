@@ -11,7 +11,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 130
         self.rect.y = 635
-        self.life = -2
+        self.life = -1
 
     def move(self):
         """Gives motion to the bullets"""
