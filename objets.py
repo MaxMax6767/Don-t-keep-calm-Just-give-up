@@ -25,8 +25,8 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.life_begin = 100
-        self.life = 100
+        self.life = 1000
+        self.beginn_life = 1000
         self.velocity = 5
         self.jump_velocity = 20
         self.gravity = 1
@@ -67,6 +67,17 @@ class Player(pygame.sprite.Sprite):
         if self.rect.y + self.rect.height < 720:
             self.rect.y += self.gravity
 
+    def update_health_bar(self, surface):
+        #def a color for the life bar (lite green)
+        bar_color = (111,210,46)
+        bar_color2 = (95, 95, 95)
+        #def rect of the bar, and the dimensions
+        bar_position = [self.rect.x, self.rect.y-20, self.life/10, 10]
+        bar_position_begin = [self.rect.x, self.rect.y - 20, self.beginn_life / 10, 10]
+        #draw the bar
+        pygame.draw.rect(surface, bar_color2, bar_position_begin)
+        pygame.draw.rect(surface, bar_color, bar_position)
+
 
 # Class for the Exit Point
 class Gate(pygame.sprite.Sprite):
@@ -79,16 +90,18 @@ class Gate(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-#class for the pic
+
+# Class for the Pic
 class Pic(pygame.sprite.Sprite):
+
     def __init__(self, x, y):
         super().__init__()
-        self.image=pygame.image.load('images/pic.png')
-        self.image= pygame.transform.scale(self.image, (30,30))
-        self.rect=self.image.get_rect()
-        self.rect.x= x
-        self.rect.y=y
-
+        self.image = pygame.image.load('images/pic.jpg')
+        self.image = pygame.transform.scale(self.image, (50,30))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.dead_rect = pygame.Rect(x+13,y+11,5,5)
 
 # Class for the Turret
 class Gun(pygame.sprite.Sprite):

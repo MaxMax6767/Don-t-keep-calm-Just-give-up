@@ -21,6 +21,12 @@ background = pygame.image.load('images/black.png')
 # Creates a variable for text color
 white_color = (255, 255, 255)
 
+# Loads the font
+arial_font = pygame.font.SysFont("arial", 40, True, True)
+texte_gagne = arial_font.render("You won !", True, white_color)
+texte_lose = arial_font.render("You're dead... ", True, white_color)
+
+
 # Creates an object for the Player
 player = Player()
 
@@ -33,11 +39,7 @@ wall_porte = Wall(800, 250, 250, 30)
 gate = Gate(900, 80)
 
 #creates a pic object
-pic = Pic(250,120)
-
-# Loads the font
-arial_font = pygame.font.SysFont("arial", 40, True, True)
-texte_gagne = arial_font.render("You won !", True, white_color)
+pic = Pic(250,140)
 
 # Creates a turret object
 gun = Gun(50, 50)
@@ -53,7 +55,7 @@ flying = False
 launched = True
 
 play = True
-gate_collid = False
+win = False
 bullet = Bullet(120)
 
 # Game loop
@@ -62,13 +64,13 @@ while launched:
     while play == True:
         #put images on the screen
         screen.blit(background, (0, 0))
-        screen.blit(player.image, player.rect)
         screen.blit(gun.image, gun.rect)
         screen.blit(gate.image, gate.rect)
         screen.blit(wall_bas.image, wall_bas.rect)
         screen.blit(wall_porte.image, wall_porte.rect)
         screen.blit(wall.image, wall.rect)
         screen.blit(pic.image, pic.rect)
+        screen.blit(player.image, player.rect)
 
         # Includes the bullets in the sprite group "all_bullets" for the object gun
         for bullet in gun.all_bullet:
@@ -81,7 +83,7 @@ while launched:
                 gun.all_bullet.remove(bullet)
             if bullet.rect.colliderect(player):
                 # removes health to the player if he gets hit by a bullet
-                player.life -=2
+                player.life += bullet.life
                 gun.all_bullet.remove(bullet)
 
         # Checks if player is in a certain rectangle
@@ -95,14 +97,12 @@ while launched:
         print(player.life)
 
         # if the player if is not affected by a collision, he will go trough the floor
-        if not (player.rect.colliderect(wall.rect_high) or player.rect.colliderect(
-                wall_porte.rect_high) or player.rect.colliderect(wall_bas.rect_high)):
+        if not (player.rect.colliderect(wall.rect_high) or player.rect.colliderect(wall_porte.rect_high) or player.rect.colliderect(wall_bas.rect_high)):
             player.Gravity()
 
         # right movement for right key pressed except if there's a wall on the right
         if player.pressed.get(pygame.K_RIGHT) and player.rect.x + player.rect.width < 1080:
-            if not player.rect.colliderect(pygame.Rect(200, 160, 1, 18)) and not player.rect.colliderect(
-                    pygame.Rect(800, 260, 1, 18)):
+            if not player.rect.colliderect(pygame.Rect(200, 160, 1, 18)) and not player.rect.colliderect(pygame.Rect(800, 260, 1, 18)):
                 player.MoveRight()
 
         # left movement for left key pressed except if there's a wall on the left
@@ -120,27 +120,33 @@ while launched:
 
         # down movement for down key pressed except if there's a wall below
         if player.pressed.get(pygame.K_DOWN) and player.rect.y + player.rect.height < 720:
-            if not player.rect.colliderect(wall_bas.rect_high) or not player.rect.colliderect(
-                    wall.rect_high) or not player.rect.colliderect(wall_porte.rect_high):
+            if not player.rect.colliderect(wall_bas.rect_high) or not player.rect.colliderect(wall.rect_high) or not player.rect.colliderect(wall_porte.rect_high):
                 player.MoveDown()
 
         # If player touches the bottom of a floor, he falls down
-        if player.rect.colliderect(pygame.Rect(200, 180, 350, 1)) or player.rect.colliderect(
-                pygame.Rect(800, 280, 300, 1)):
+        if player.rect.colliderect(pygame.Rect(200, 180, 350, 1)) or player.rect.colliderect(pygame.Rect(800, 280, 300, 1)):
             player.Gravity()
+
+        # If player touches the Pic he dies
+        if player.rect.colliderect(pic.dead_rect):
+            print("he touches the pic")
+            player.life=0
 
         # If player touches Exit point, it ends the game and displays a message
         if player.rect.colliderect(gate):
-            screen.blit(texte_gagne, (300, 300))
-            gate_collid = True
+            win = True
             play = False
             break
 
 
-
         # If player live too low, game ends
         if player.life == 0:
-            pygame.quit()
+            print("t mort")
+            play=False
+            break
+
+        # draw the life bar
+        player.update_health_bar(screen)
 
         # updates the screen
         pygame.display.flip()
@@ -162,12 +168,18 @@ while launched:
                 player.pressed[event.key] = False
 
     # Exit point collisions
-    if gate_collid == True:
+    if win == True:
         gate.image = pygame.image.load('images/gate_open.jpg')
+        gate.image = pygame.transform.scale(gate.image, (120, 170))
+        screen.blit(gate.image, gate.rect)
         screen.blit(texte_gagne, (300, 300))
         screen.blit(restart.image, restart.rect)
         screen.blit(quit.image, quit.rect)
 
+    elif player.life==0:
+        screen.blit(texte_lose, (300, 300))
+        screen.blit(restart.image, restart.rect)
+        screen.blit(quit.image, quit.rect)
 
     # Screen Update
     pygame.display.flip()
@@ -178,7 +190,7 @@ while launched:
         if event.type == pygame.QUIT:
             launched = False
             pygame.quit()
-            print("fermeture du jeu")
+            print("game closed")
 
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -189,5 +201,8 @@ while launched:
                 player.rect.x = 500
                 player.rect.y = 300
                 player.pressed = {}
-                player.life = 100
+                player.life = player.beginn_life
+                gate.image = pygame.image.load('images/gate.jpg')
+                gate.image = pygame.transform.scale(gate.image, (120,180))
+                win=False
                 continue
