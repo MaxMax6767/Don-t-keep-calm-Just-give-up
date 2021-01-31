@@ -30,7 +30,10 @@ wall_bas = Wall(0, 690, 1080, 30)
 wall_porte = Wall(800, 250, 250, 30)
 
 # creates a door object
-gate = Gate(900, 50)
+gate = Gate(900, 80)
+
+#creates a pic object
+pic = Pic(250,120)
 
 # Loads the font
 arial_font = pygame.font.SysFont("arial", 40, True, True)
@@ -65,15 +68,20 @@ while launched:
         screen.blit(wall_bas.image, wall_bas.rect)
         screen.blit(wall_porte.image, wall_porte.rect)
         screen.blit(wall.image, wall.rect)
+        screen.blit(pic.image, pic.rect)
 
         # Includes the bullets in the sprite group "all_bullets" for the object gun
         for bullet in gun.all_bullet:
             # Gives motion to the bullets
             bullet.move()
+
+
             # Deletes the bullets sprites when they touch the player or the screen border
             if bullet.rect.x > 1080:
                 gun.all_bullet.remove(bullet)
             if bullet.rect.colliderect(player):
+                # removes health to the player if he gets hit by a bullet
+                player.life -=2
                 gun.all_bullet.remove(bullet)
 
         # Checks if player is in a certain rectangle
@@ -83,10 +91,6 @@ while launched:
 
         # displays the bullet
         gun.all_bullet.draw(screen)
-
-        # removes health to the player if he gets hit by a bullet
-        if check_collision(player, gun.all_bullet):
-            player.life -= 2
 
         print(player.life)
 
@@ -108,8 +112,7 @@ while launched:
 
         # up movement for up key pressed except if there's a wall above
         if player.pressed.get(pygame.K_UP) and player.rect.y > 0:
-            if not player.rect.colliderect(pygame.Rect(200, 178, 350, 1)) and not player.rect.colliderect(
-                    pygame.Rect(800, 278, 350, 1)):
+            if not player.rect.colliderect(pygame.Rect(200, 178, 350, 1)) and not player.rect.colliderect(pygame.Rect(800, 278, 350, 1)):
                 flying = player.MoveUp()
                 # if the loop is executed 15 times, it will stop movements to stop infinite jump
                 if player.move_up_nbr % 15 == 0:
@@ -133,8 +136,7 @@ while launched:
             play = False
             break
 
-        else:
-            gate.image = pygame.image.load('images/gate.png')
+
 
         # If player live too low, game ends
         if player.life == 0:
@@ -163,9 +165,9 @@ while launched:
     if gate_collid == True:
         gate.image = pygame.image.load('images/gate_open.jpg')
         screen.blit(texte_gagne, (300, 300))
-        gate.image = pygame.image.load('images/gate_open.jpg')
         screen.blit(restart.image, restart.rect)
         screen.blit(quit.image, quit.rect)
+
 
     # Screen Update
     pygame.display.flip()

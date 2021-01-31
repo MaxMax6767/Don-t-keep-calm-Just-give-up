@@ -29,7 +29,7 @@ class Player(pygame.sprite.Sprite):
         self.life = 100
         self.velocity = 5
         self.jump_velocity = 20
-        self.gravity = 2
+        self.gravity = 1
         self.image = pygame.image.load('images/stickman.png')
         self.rect = self.image.get_rect()
         self.rect.x = 500
@@ -73,11 +73,21 @@ class Gate(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load('images/gate.png')
-        self.image = pygame.transform.scale(self.image, (150, 200))
+        self.image = pygame.image.load('images/gate.jpg')
+        self.image = pygame.transform.scale(self.image, (120, 180))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+#class for the pic
+class Pic(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image=pygame.image.load('images/pic.png')
+        self.image= pygame.transform.scale(self.image, (30,30))
+        self.rect=self.image.get_rect()
+        self.rect.x= x
+        self.rect.y=y
 
 
 # Class for the Turret
