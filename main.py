@@ -1,2 +1,8 @@
-import subprocess
-subprocess.call("start python room1.py")
+from room1 import *
+
+room1 = False
+room1= game1()
+
+while room1[0]!=True:
+    room1=game1()
+

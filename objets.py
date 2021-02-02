@@ -117,8 +117,7 @@ class Gun(pygame.sprite.Sprite):
 
     def launch_bullet(self):
         """Creates a bullet and stocks it in a sprite group"""
-        if pygame.time.get_ticks() > 2000:
-            self.all_bullet.add(Bullet(self))
+        self.all_bullet.add(Bullet(self))
 
 
 # Class for Restart button
