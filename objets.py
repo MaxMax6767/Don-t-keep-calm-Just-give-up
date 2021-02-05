@@ -14,8 +14,8 @@ class Wall(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.rect_bottom = pygame.Rect(x + 5, y - height, long - 15, 1)
-        self.rect_high = pygame.Rect(x + 20, y + 1, long - 40, 1)
+        self.rect_bottom = pygame.Rect(x + 5, y + height - 5, 5, long - 10)
+        self.rect_high = pygame.Rect(x + 5, y + 1, long - 40, 1)
         self.rect_left = pygame.Rect(x + 5, y + 5, 1, height - 10)
         self.rect_right = pygame.Rect(x + long - 5, y + 5, 1, height - 10)
 
