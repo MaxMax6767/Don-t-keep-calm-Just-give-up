@@ -118,19 +118,19 @@ def game1():
 
             # up movement for up key pressed except if there's a wall above
             if player.pressed.get(pygame.K_UP) and player.rect.y > 0:
-                if not player.rect.colliderect(wall.rect_bottom) and not player.rect.colliderect(pygame.Rect(800, 278, 350, 1)):
+                if not player.rect.colliderect(wall.rect_bottom) and not player.rect.colliderect(wall_porte.rect_bottom):
                     player.MoveUp()
                     # if the loop is executed 15 times, it will stop movements to stop infinite jump
-                    """if player.move_up_nbr % 10 == 0:
-                        player.pressed[event.key] = False"""
+                    if player.move_up_nbr % 15 == 0:
+                        player.pressed[event.key] = False
 
             # down movement for down key pressed except if there's a wall below
             if player.pressed.get(pygame.K_DOWN) and player.rect.y + player.rect.height < 720:
-                if not player.rect.colliderect(wall_bas.rect_high) or not player.rect.colliderect(wall.rect_high) or not player.rect.colliderect(wall_porte.rect_high):
+                if not player.rect.colliderect(wall_bas.rect_high) and not player.rect.colliderect(wall.rect_high) and not player.rect.colliderect(wall_porte.rect_high):
                     player.MoveDown()
 
             # If player touches the bottom of a floor, he falls down
-            if player.rect.colliderect(pygame.Rect(200, 180, 350, 1)) or player.rect.colliderect(pygame.Rect(800, 280, 300, 1)):
+            if player.rect.colliderect(wall.rect_bottom) or player.rect.colliderect(wall_porte.rect_bottom):
                 player.Gravity()
 
             # If player touches the Pic he dies
