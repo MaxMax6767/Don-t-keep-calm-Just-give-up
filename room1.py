@@ -30,13 +30,15 @@ def game1():
     # Add walls to the sprite group
     wall = Wall(120, 370, 200, 15)
     wall_bas = Wall(0, 700, 1080, 20)
-    wall_porte = Wall(800, 250, 250, 15)
+    wall_porte = Wall(800, 245, 250, 20)
 
     # creates a door object
-    gate = Gate(900, 80)
+    gate = Gate(900, 65)
 
     #creates a pic object
     pic = Pic(280,670)
+    pic2 = Pic(450,670)
+    pic3 = Pic(620, 670)
 
     # Game launching variable
     launched = True
@@ -60,6 +62,8 @@ def game1():
             screen.blit(wall_porte.image, wall_porte.rect)
             screen.blit(wall.image, wall.rect)
             screen.blit(pic.image, pic.rect)
+            screen.blit(pic2.image, pic2.rect)
+            screen.blit(pic3.image, pic3.rect)
             screen.blit(player.image, player.rect)
 
 
@@ -87,6 +91,7 @@ def game1():
             # up movement for up key pressed except if there's a wall above
             if player.pressed.get(pygame.K_UP) and player.rect.y > 0:
                 if not player.rect.colliderect(wall.rect_bottom) and not player.rect.colliderect(wall_porte.rect_bottom):
+                    #if player don't fly so much, he can fly
                     if player.move_up_nbr2<30:
                         player.MoveUp()
                     # if the loop is executed 15 times, it will stop movements to stop infinite jump
@@ -102,12 +107,13 @@ def game1():
             if player.rect.colliderect(wall.rect_bottom) or player.rect.colliderect(wall_porte.rect_bottom):
                 player.Gravity()
 
-            # If player touches the Pic he dies
-            if player.rect.colliderect(pic.dead_rect):
-                print("he touches the pic")
-                player.life=0
+            #if player touch a pic, he's dead! ;-)
+            pic.dead(player)
+            pic2.dead(player)
+            pic3.dead(player)
 
-            if player.rect.colliderect(wall_bas) or player.rect.colliderect(wall) or player.rect.colliderect(wall_porte):
+            #if player touch a wall, he can fly a new time
+            if player.rect.colliderect(wall_bas.rect_high) or player.rect.colliderect(wall.rect_high) or player.rect.colliderect(wall_porte.rect_high):
                 player.move_up_nbr2 = 0
 
             # If player touches Exit point, it ends the game and displays a message
@@ -174,7 +180,7 @@ def game1():
         # During 2 seconds we can see the door open and a win text
         while time.time()<end:
             gate.image = pygame.image.load('images/gate_open.jpg')
-            gate.image = pygame.transform.scale(gate.image, (120, 170))
+            gate.image = pygame.transform.scale(gate.image, (120, 180))
             screen.blit(gate.image, gate.rect)
             screen.blit(texte_gagne, (300, 300))
 

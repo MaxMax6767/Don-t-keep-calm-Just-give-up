@@ -27,7 +27,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.life = 1000
         self.beginn_life = 1000
-        self.velocity = 5
+        self.velocity = 2
         self.jump_velocity = 20
         self.gravity = 1
         self.image = pygame.image.load('images/stickman.png')
@@ -104,6 +104,10 @@ class Pic(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.dead_rect = pygame.Rect(x+13,y,5,5)
+    def dead(self, player):
+        if player.rect.colliderect(self.dead_rect):
+            player.life=0
+
 
 # Class for the Turret
 class Gun(pygame.sprite.Sprite):
