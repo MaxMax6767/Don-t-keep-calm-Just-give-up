@@ -37,6 +37,7 @@ class Player(pygame.sprite.Sprite):
         self.pressed = {}
         self.time = pygame.time.get_ticks()
         self.move_up_nbr = 0
+        self.move_up_nbr2 = 0
 
     # Movements functions :
 
@@ -54,6 +55,7 @@ class Player(pygame.sprite.Sprite):
     def MoveUp(self):
         self.image = pygame.image.load('images/stickman_jump.png')
         self.move_up_nbr += 1
+        self.move_up_nbr2 +=1
         self.rect.y -= self.jump_velocity
         return True
 

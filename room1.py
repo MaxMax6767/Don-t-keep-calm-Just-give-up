@@ -28,29 +28,20 @@ def game1():
     player = Player()
 
     # Add walls to the sprite group
-    wall = Wall(200, 150, 350, 30)
-    wall_bas = Wall(0, 690, 1080, 30)
-    wall_porte = Wall(800, 250, 250, 30)
+    wall = Wall(120, 370, 200, 15)
+    wall_bas = Wall(0, 700, 1080, 20)
+    wall_porte = Wall(800, 250, 250, 15)
 
     # creates a door object
     gate = Gate(900, 80)
 
     #creates a pic object
-    pic = Pic(250,140)
-
-    # Creates a turret object
-    gun = Gun(50, 50)
-
-    # Creates restart button object
-    restart = Restart()
-    quit = Quit()
+    pic = Pic(280,670)
 
     # Game launching variable
     launched = True
-
     play = True
     win = False
-    bullet = Bullet(120)
 
     # time at the begining of the game
     time1 = time.perf_counter()
@@ -64,7 +55,6 @@ def game1():
         while play == True:
             #put images on the screen
             screen.blit(background, (0, 0))
-            screen.blit(gun.image, gun.rect)
             screen.blit(gate.image, gate.rect)
             screen.blit(wall_bas.image, wall_bas.rect)
             screen.blit(wall_porte.image, wall_porte.rect)
@@ -72,29 +62,7 @@ def game1():
             screen.blit(pic.image, pic.rect)
             screen.blit(player.image, player.rect)
 
-            # Includes the bullets in the sprite group "all_bullets" for the object gun
-            for bullet in gun.all_bullet:
-                # Gives motion to the bullets
-                bullet.move()
 
-
-                # Deletes the bullets sprites when they touch the player or the screen border
-                if bullet.rect.x > 1080:
-                    gun.all_bullet.remove(bullet)
-                if bullet.rect.colliderect(player):
-                    # removes health to the player if he gets hit by a bullet
-                    player.life += bullet.life
-                    gun.all_bullet.remove(bullet)
-
-            # Checks if player is in a certain rectangle
-            if player.rect.colliderect(pygame.Rect(140, 600, 1080, 100)):
-                #lanch bullet after 1s
-                if time.time()>time_launch_bullet:
-                    # adds the bullet to the sprite group gun
-                    gun.launch_bullet()
-
-            # displays the bullet
-            gun.all_bullet.draw(screen)
 
             # create and show the time
             time_run = int(time.perf_counter())
@@ -119,7 +87,8 @@ def game1():
             # up movement for up key pressed except if there's a wall above
             if player.pressed.get(pygame.K_UP) and player.rect.y > 0:
                 if not player.rect.colliderect(wall.rect_bottom) and not player.rect.colliderect(wall_porte.rect_bottom):
-                    player.MoveUp()
+                    if player.move_up_nbr2<30:
+                        player.MoveUp()
                     # if the loop is executed 15 times, it will stop movements to stop infinite jump
                     if player.move_up_nbr % 15 == 0:
                         player.pressed[event.key] = False
@@ -137,6 +106,9 @@ def game1():
             if player.rect.colliderect(pic.dead_rect):
                 print("he touches the pic")
                 player.life=0
+
+            if player.rect.colliderect(wall_bas) or player.rect.colliderect(wall) or player.rect.colliderect(wall_porte):
+                player.move_up_nbr2 = 0
 
             # If player touches Exit point, it ends the game and displays a message
             if player.rect.colliderect(gate):
@@ -172,8 +144,8 @@ def game1():
                 elif event.type == pygame.KEYUP:
                     player.pressed[event.key] = False
                 elif event.type == pygame.MOUSEMOTION:
-                    # récupére la position de la souris et la print
-                    print("{}".format(event.pos))
+                    # print the position of the mouse
+                    print(event.pos)
 
         # Exit point collisions
         if win == True :
