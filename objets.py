@@ -1,5 +1,4 @@
-import pygame
-from bullet import Bullet
+from bullet import *
 
 
 # Class for walls

@@ -3,7 +3,7 @@ from bullet import *
 import time
 
 
-def game1():
+def game2():
     # Starts the Pygame Library
     pygame.init()
 
@@ -19,7 +19,7 @@ def game1():
 
     # Loads the font
     arial_font = pygame.font.SysFont("arial", 40, True, True)
-    arial_font2 = pygame.font.SysFont("arial", 200, True, True)
+    arial_font2 = pygame.font.SysFont("arial", 200, True, white_color)
     texte_gagne = arial_font.render("You won !", True, white_color)
     texte_lose = arial_font.render("You're dead... ", True, white_color)
 
@@ -37,7 +37,8 @@ def game1():
 
     #creates a pic object
     pic = Pic(280,670)
-    pic2 = Pic(620, 670)
+    pic2 = Pic(450,670)
+    pic3 = Pic(620, 670)
 
     # Game launching variable
     launched = True
@@ -62,7 +63,9 @@ def game1():
             screen.blit(wall.image, wall.rect)
             screen.blit(pic.image, pic.rect)
             screen.blit(pic2.image, pic2.rect)
+            screen.blit(pic3.image, pic3.rect)
             screen.blit(player.image, player.rect)
+
 
 
             # create and show the time
@@ -107,6 +110,7 @@ def game1():
             #if player touch a pic, he's dead! ;-)
             pic.dead(player)
             pic2.dead(player)
+            pic3.dead(player)
 
             #if player touch a wall, he can fly a new time
             if player.rect.colliderect(wall_bas.rect_high) or player.rect.colliderect(wall.rect_high) or player.rect.colliderect(wall_porte.rect_high):
@@ -188,12 +192,11 @@ def game1():
                     pygame.quit()
                     print("game closed")
 
-
             level_up_time = time.time() + 1
             while time.time() < level_up_time:
                 texte_level_up = arial_font2.render("level UP!", True, white_color)
-                screen.fill((0,0,0))
-                screen.blit(texte_level_up, (120,200))
+                screen.fill((0, 0, 0))
+                screen.blit(texte_level_up, (120, 200))
                 pygame.display.flip()
                 for event in pygame.event.get():
                     # Game closing with ALT + F4 or windows X
