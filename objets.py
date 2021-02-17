@@ -1,6 +1,5 @@
 from bullet import *
 
-
 # Class for walls
 class Wall(pygame.sprite.Sprite):
 
@@ -37,6 +36,9 @@ class Player(pygame.sprite.Sprite):
         self.time = pygame.time.get_ticks()
         self.move_up_nbr = 0
         self.move_up_nbr2 = 0
+        self.nbr_image=17
+        self.nbr_image_left=0
+        self.nbr_image_left2=0
 
     # Movements functions :
 
@@ -47,8 +49,16 @@ class Player(pygame.sprite.Sprite):
 
     # Left
     def MoveLeft(self):
-        self.image = pygame.image.load('images/stickman_left.png')
+        self.nbr_image_left2=str(self.nbr_image_left2)
+        self.image = pygame.image.load(('images/course gauche/image'+self.nbr_image_left2+'.png'))
+        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0]/5),int(self.image.get_rect().size[1]/5)))
         self.rect.x -= self.velocity
+        self.nbr_image_left+=1
+
+        if self.nbr_image_left ==160:
+            self.nbr_image_left=0
+        else:
+            self.nbr_image_left2=int(self.nbr_image_left/10)
 
     # Up
     def MoveUp(self):
@@ -125,7 +135,7 @@ class Gun(pygame.sprite.Sprite):
         self.all_bullet.add(Bullet(self))
 
 
-# Class for Restart button
+"""# Class for Restart button
 class Restart(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -147,4 +157,4 @@ class Quit(pygame.sprite.Sprite):
         self.clickable_area = pygame.Rect(225, 350, 350, 150)
 
     def clique(self):
-        pygame.quit()
+        pygame.quit()"""
