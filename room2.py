@@ -148,9 +148,9 @@ def game2():
                 # If there's no new input, empty the list
                 elif event.type == pygame.KEYUP:
                     player.pressed[event.key] = False
-                elif event.type == pygame.MOUSEMOTION:
+                """elif event.type == pygame.MOUSEMOTION:
                     # print the position of the mouse
-                    print(event.pos)
+                    print(event.pos)"""
 
         # Exit point collisions
         if win == True :

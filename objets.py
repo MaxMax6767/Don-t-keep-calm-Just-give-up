@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 500
         self.rect.y = 580
-        self.pressed = {}
+        self.pressed = {1073741904: False, 1073741903: False, 1073741906: False}
         self.time = pygame.time.get_ticks()
         self.move_up_nbr = 0
         self.move_up_nbr2 = 0
