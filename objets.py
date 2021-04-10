@@ -30,54 +30,97 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 1
         self.image = pygame.image.load('images/stickman.png')
         self.rect = self.image.get_rect()
-        self.rect.x = 500
-        self.rect.y = 580
+        self.rect.x = 0
+        self.rect.y = 0
         self.pressed = {1073741904: False, 1073741903: False, 1073741906: False}
         self.time = pygame.time.get_ticks()
         self.move_up_nbr = 0
         self.move_up_nbr2 = 0
-        self.nbr_image=17
+        self.nbr_image=6
         self.nbr_image_left=0
         self.nbr_image_left2=0
-
+        self.nbr_image_right = 0
+        self.nbr_image_right2 = 0
+        self.nbr_image_j = 9
+        self.nbr_image_jump = 0
+        self.nbr_image_jump2 = 0
+        self.direction = ""
     # Movements functions :
 
     # Right
-    def MoveRight(self):
-        self.image = pygame.image.load('images/stickman_right.png')
+    def MoveRightTouching(self):
+        self.direction = "right"
+        self.nbr_image_right2 = str(self.nbr_image_right2)
+        self.image = pygame.image.load(('images/run_right/rr' + self.nbr_image_right2 + '.png'))
+        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0] / 3), int(self.image.get_rect().size[1] / 3)))
         self.rect.x += self.velocity
+        self.nbr_image_right += 1
 
+        if self.nbr_image_right == 50:
+            self.nbr_image_right = 0
+        else:
+            self.nbr_image_right2 = int(self.nbr_image_right / 10)
+
+    def MoveRight(self):
+        self.direction = "right"
+        self.image = pygame.image.load('images/jr.png')
+        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0]/3),int(self.image.get_rect().size[1]/3)))
+        self.rect.x += self.velocity
     # Left
-    def MoveLeft(self):
+    def MoveLeftTouching(self):
+        self.direction = "left"
         self.nbr_image_left2=str(self.nbr_image_left2)
-        self.image = pygame.image.load(('images/course gauche/image'+self.nbr_image_left2+'.png'))
-        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0]/5),int(self.image.get_rect().size[1]/5)))
+        self.image = pygame.image.load('images/run_left/rl'+self.nbr_image_left2+'.png')
+        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0]/3),int(self.image.get_rect().size[1]/3)))
         self.rect.x -= self.velocity
         self.nbr_image_left+=1
 
-        if self.nbr_image_left ==160:
+        if self.nbr_image_left == 50:
             self.nbr_image_left=0
         else:
             self.nbr_image_left2=int(self.nbr_image_left/10)
 
+    def MoveLeft(self):
+        self.direction = "left"
+        self.image = pygame.image.load('images/jl.png')
+        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0]/3),int(self.image.get_rect().size[1]/3)))
+        self.rect.x -= self.velocity
+
     # Up
     def MoveUp(self):
-        self.image = pygame.image.load('images/stickman_jump.png')
+        self.image = pygame.image.load('images/jl.png')
+        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0]/3),int(self.image.get_rect().size[1]/3)))
         self.move_up_nbr += 1
         self.move_up_nbr2 +=1
         self.rect.y -= self.jump_velocity
-        return True
+
+    """def MoveUp(self):
+        self.nbr_image_jump2 = str(self.nbr_image_jump2)
+        self.image = pygame.image.load(('images/jump_right/j' + self.nbr_image_jump2 + '.png'))
+        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0] / 3), int(self.image.get_rect().size[1] / 3)))
+
+        self.rect.y -= self.jump_velocity
+        self.nbr_image_right += 1
+
+        self.move_up_nbr += 1
+        self.move_up_nbr2 += 1
+
+        if self.nbr_image_jump == 80:
+            self.nbr_image_jump = 0
+        else:
+            self.nbr_image_jump2 = int(self.nbr_image_jump / 10)"""
 
     # Down
     def MoveDown(self):
         self.rect.y += self.velocity
-        return False
+
 
     # Gravity forces
     def Gravity(self):
         if self.rect.y + self.rect.height < 720:
             self.rect.y += self.gravity
 
+    #life bar
     def update_health_bar(self, surface):
         #def a color for the life bar (lite green)
         bar_color = (111,210,46)
@@ -113,6 +156,7 @@ class Pic(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.dead_rect = pygame.Rect(x+13,y,5,5)
+    #if player touche the pic, he will be dead
     def dead(self, player):
         if player.rect.colliderect(self.dead_rect):
             player.life=0
@@ -130,6 +174,7 @@ class Gun(pygame.sprite.Sprite):
         self.rect.y = 600
         self.all_bullet = pygame.sprite.Group()
 
+    #launch bullet from the gun
     def launch_bullet(self):
         """Creates a bullet and stocks it in a sprite group"""
         self.all_bullet.add(Bullet(self))

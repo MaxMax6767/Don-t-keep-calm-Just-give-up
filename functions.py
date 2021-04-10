@@ -5,18 +5,35 @@ def mouvements(player, wall, wall_bas, wall_porte):
     # if the player if is not affected by a collision, he will go trough the floor
     if not (player.rect.colliderect(wall.rect_high) or player.rect.colliderect(wall_porte.rect_high) or player.rect.colliderect(wall_bas.rect_high)):
         player.Gravity()
+        if player.pressed.get(pygame.K_RIGHT) and player.rect.x + player.rect.width < 1080:
+            if not player.rect.colliderect(wall.rect_left) and not player.rect.colliderect(wall_porte.rect_left):
+                player.MoveRight()
+        elif player.pressed.get(pygame.K_LEFT) and player.rect.x > 0:
+            if not player.rect.colliderect(wall.rect_right):
+                player.MoveLeft()
+        else:
+            if player.direction == "left":
+                player.image = pygame.image.load('images/run_left/rl4.png')
+                player.image = pygame.transform.scale(player.image, (100,100))
+            else:
+                player.image = pygame.image.load('images/run_right/rr4.png')
+                player.image = pygame.transform.scale(player.image, (100, 100))
 
     # right movement for right key pressed except if there's a wall on the right
-    if player.pressed.get(pygame.K_RIGHT) and player.rect.x + player.rect.width < 1080:
+    elif player.pressed.get(pygame.K_RIGHT) and player.rect.x + player.rect.width < 1080:
         if not player.rect.colliderect(wall.rect_left) and not player.rect.colliderect(wall_porte.rect_left):
-            player.MoveRight()
-
+            player.MoveRightTouching()
     # left movement for left key pressed except if there's a wall on the left
-    if player.pressed.get(pygame.K_LEFT) and player.rect.x > 0:
+    elif player.pressed.get(pygame.K_LEFT) and player.rect.x > 0:
         if not player.rect.colliderect(wall.rect_right):
-            player.MoveLeft()
+            player.MoveLeftTouching()
 
-    # up movement for up key pressed except if there's a wall above
+
+    # If player touches the bottom of a floor, he falls down
+    if player.rect.colliderect(wall.rect_bottom) or player.rect.colliderect(wall_porte.rect_bottom):
+        player.Gravity()
+
+       # up movement for up key pressed except if there's a wall above
     if player.pressed.get(pygame.K_UP) and player.rect.y > 0:
         if not player.rect.colliderect(wall.rect_bottom) and not player.rect.colliderect(wall_porte.rect_bottom):
             # if player don't fly so much, he can fly
@@ -31,8 +48,3 @@ def mouvements(player, wall, wall_bas, wall_porte):
         if not player.rect.colliderect(wall_bas.rect_high) and not player.rect.colliderect(
                 wall.rect_high) and not player.rect.colliderect(wall_porte.rect_high):
             player.MoveDown()
-
-    # If player touches the bottom of a floor, he falls down
-    if player.rect.colliderect(wall.rect_bottom) or player.rect.colliderect(wall_porte.rect_bottom):
-        player.Gravity()
-
