@@ -10,12 +10,45 @@ class Wall(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (long, height))
         # Handles the screen coordinates
         self.rect = self.image.get_rect()
+        self.x = x
+        self.long = long
+        self.height = height
         self.rect.x = x
         self.rect.y = y
-        self.rect_bottom = pygame.Rect(x+5, y + height - 2, long-10, 1)
-        self.rect_high = pygame.Rect(x+5, y , long-10 , 1)
-        self.rect_left = pygame.Rect(x + 5, y + 5, 1, height - 10)
-        self.rect_right = pygame.Rect(x + long - 5, y + 5, 1, height - 10)
+        self.rect_bottom = pygame.Rect(self.rect.x + 5, self.rect.y + self.height - 2, self.long - 10, 1)
+        self.rect_high = pygame.Rect(self.rect.x + 5, self.rect.y, self.long - 10, 1)
+        self.rect_left = pygame.Rect(self.rect.x + 5, self.rect.y + 5, 1, self.height - 10)
+        self.rect_right = pygame.Rect(self.rect.x + self.long - 5, self.rect.y + 5, 1, self.height - 10)
+        self.right = False
+        self.left = False
+        self.compt = 0
+
+    def Move(self):
+        if self.rect.x <self.x +200 and self.left == True:
+            self.compt+=1
+            if self.compt%2 == 0:
+                self.rect.x += 1
+                self.right = False
+                self.rect_bottom = pygame.Rect(self.rect.x + 5, self.rect.y + self.height - 2, self.long - 10, 1)
+                self.rect_high = pygame.Rect(self.rect.x + 5, self.rect.y, self.long - 10, 1)
+                self.rect_left = pygame.Rect(self.rect.x + 5, self.rect.y + 5, 1, self.height - 10)
+                self.rect_right = pygame.Rect(self.rect.x + self.long - 5, self.rect.y + 5, 1, self.height - 10)
+        elif self.rect.x == self.x+200 :
+            self.right = True
+
+        if self.right == True and self.rect.x > self.x:
+            self.compt+=1
+            if self.compt%2 == 0:
+                self.rect.x -= 1
+                self.left = False
+                self.rect_bottom = pygame.Rect(self.rect.x + 5, self.rect.y + self.height - 2, self.long - 10, 1)
+                self.rect_high = pygame.Rect(self.rect.x + 5, self.rect.y, self.long - 10, 1)
+                self.rect_left = pygame.Rect(self.rect.x + 5, self.rect.y + 5, 1, self.height - 10)
+                self.rect_right = pygame.Rect(self.rect.x + self.long - 5, self.rect.y + 5, 1, self.height - 10)
+        elif self.rect.x == self.x:
+            self.left = True
+
+
 
 
 # Class for Player
@@ -25,12 +58,12 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.life = 1000
         self.beginn_life = 1000
-        self.velocity = 2
-        self.jump_velocity = 20
+        self.velocity = 1
+        self.jump_velocity = 15
         self.gravity = 1
         self.image = pygame.image.load('images/stickman.png')
         self.rect = self.image.get_rect()
-        self.rect.x = 0
+        self.rect.x = 50
         self.rect.y = 0
         self.pressed = {1073741904: False, 1073741903: False, 1073741906: False}
         self.time = pygame.time.get_ticks()
@@ -144,6 +177,10 @@ class Gate(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+    def Collid(self):
+        self.image = pygame.image.load('images/gate_open.jpg')
+        self.image = pygame.transform.scale(self.image, (120, 180))
+
 
 # Class for the Pic
 class Pic(pygame.sprite.Sprite):
@@ -153,13 +190,37 @@ class Pic(pygame.sprite.Sprite):
         self.image = pygame.image.load('images/pic.jpg')
         self.image = pygame.transform.scale(self.image, (50,30))
         self.rect = self.image.get_rect()
+        self.x = x
         self.rect.x = x
         self.rect.y = y
-        self.dead_rect = pygame.Rect(x+13,y,5,5)
+        self.dead_rect = pygame.Rect(self.rect.x+13,self.rect.y,5,5)
+        self.compt = 0
+        self.left = False
+        self.right = False
     #if player touche the pic, he will be dead
     def dead(self, player):
         if player.rect.colliderect(self.dead_rect):
             player.life=0
+
+    def Move(self, v):
+        if self.rect.x <self.x +200 and self.left == True:
+            self.compt+=1
+            if self.compt%v == 0:
+                self.rect.x += 1
+                self.right = False
+                self.dead_rect = pygame.Rect(self.rect.x + 13, self.rect.y, 5, 5)
+        elif self.rect.x == self.x+200 :
+            self.right = True
+
+        if self.right == True and self.rect.x > self.x:
+            self.compt+=1
+            if self.compt%v == 0:
+                self.rect.x -= 1
+                self.left = False
+                self.dead_rect = pygame.Rect(self.rect.x + 13, self.rect.y, 5, 5)
+        elif self.rect.x == self.x:
+            self.left = True
+
 
 
 # Class for the Turret
