@@ -31,7 +31,7 @@ def game2():
     wall_begin = Wall(60, 170, 150, 15)
     wall2 = Wall(900, 720, 200, 15)
     wall_bas = Wall(0, 700, 1080, 20)
-    wall3 = Wall(0, 400, 150, 15)
+    wall3 = Wall(10000, 0, 1, 1)
 
     # creates a door object
     gate = Gate(930, 550)
