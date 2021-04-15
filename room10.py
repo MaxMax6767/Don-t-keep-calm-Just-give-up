@@ -185,7 +185,7 @@ def game10():
 
             level_up_time = time.time() + 1
             while time.time() < level_up_time:
-                texte_level_up = arial_font2.render("Level UP!", True, white_color)
+                texte_level_up = arial_font2.render("You Win!", True, white_color)
                 screen.fill((0, 0, 0))
                 screen.blit(texte_level_up, (100, 200))
                 pygame.display.flip()

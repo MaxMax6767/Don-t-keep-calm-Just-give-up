@@ -180,7 +180,8 @@ class Gate(pygame.sprite.Sprite):
     def Collid(self):
         self.image = pygame.image.load('images/gate_open.jpg')
         self.image = pygame.transform.scale(self.image, (120, 180))
-
+        self.mus = pygame.mixer.Sound("musique/door.mp3")
+        self.mus.play()
 
 # Class for the Pic
 class Pic(pygame.sprite.Sprite):
@@ -201,6 +202,9 @@ class Pic(pygame.sprite.Sprite):
     def dead(self, player):
         if player.rect.colliderect(self.dead_rect):
             player.life=0
+            self.mus = pygame.mixer.Sound("musique/dead.mp3")
+            self.mus.set_volume(1.0)
+            self.mus.play()
 
     def Move(self, v):
         if self.rect.x <self.x +200 and self.left == True:

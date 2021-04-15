@@ -9,6 +9,12 @@ from room8 import *
 from room9 import *
 from room10 import *
 
+pygame.init()
+mus = pygame.mixer.Sound("musique/music.mp3")
+mus.set_volume(0.8)
+mus.play(loops=-1, fade_ms=2000)
+
+
 room1= game1()
 while room1[0]!=True:
     room1=game1()
@@ -48,3 +54,5 @@ while room9[0]!=True:
 room10= game10()
 while room10[0]!=True:
     room10=game10()
+
+mus.stop()
