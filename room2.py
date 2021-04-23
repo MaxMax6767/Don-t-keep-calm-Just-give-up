@@ -1,9 +1,12 @@
 from objets import *
 from functions import *
 import time
+from Sounds import music
+
 
 
 def game2():
+    music("play")
     # Starts the Pygame Library
     pygame.init()
 
