@@ -1,12 +1,11 @@
 {
   "movementDown": "K_a",
-  "displayFullscreen": 1,
   "SoundsVolumeMute": false,
   "movementJump": "K_a",
   "displayresHeight": 576,
-  "SoundsVolume": 81.68103790283203,
+  "SoundsVolume": 15.68103790283203,
   "MusicVolumeMute": false,
-  "MusicVolume": 26.077587127685547,
+  "MusicVolume": 15.077587127685547,
   "movementStrafeLeft": "K_a",
   "movementStrafeRight": "K_a",
   "displayResWidth": 1024
