@@ -10,11 +10,6 @@ from room9 import *
 from room10 import *
 from Sounds import *
 
-muted = False
-
-while muted == False:
-
-    break
 
 room1= game1()
 while room1[0]!=True:
