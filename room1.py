@@ -100,14 +100,11 @@ def game1():
                     play = False
                     break
 
+            print(player.nbr_image_right, player.nbr_image_right2)
             # If player live too low, game ends
             if player.life == 0:
                 play=False
                 break
-
-            # draw the life bar
-            player.update_health_bar(screen)
-
 
             # updates the screen
             pygame.display.flip()

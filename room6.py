@@ -109,10 +109,6 @@ def game6():
                 play=False
                 break
 
-            # draw the life bar
-            player.update_health_bar(screen)
-
-
             # updates the screen
             pygame.display.flip()
 
