@@ -65,7 +65,9 @@ class Player(pygame.sprite.Sprite):
         self.velocity = round(ScreenHeight / 720 * 1.875)
         self.jump_velocity = round(ScreenHeight / 720 * 10.5)
         self.gravity = round(ScreenHeight / 720 * 1.9)
-        self.image = pygame.image.load('images/stickman.png')
+        self.image = pygame.image.load('images/run_right/rr4.png')
+        self.image = pygame.transform.scale(self.image, (
+            round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3 )))
         self.rect = self.image.get_rect()
         self.rect.x = 50
         self.rect.y = 0
