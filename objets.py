@@ -1,5 +1,10 @@
 from bullet import *
 from Sounds import *
+from Setting import resolution
+
+ScreenWidth = resolution()[0]
+ScreenHeight = resolution()[1]
+
 
 # Class for walls
 class Wall(pygame.sprite.Sprite):
@@ -25,21 +30,21 @@ class Wall(pygame.sprite.Sprite):
         self.compt = 0
 
     def Move(self):
-        if self.rect.x <self.x +200 and self.left == True:
-            self.compt+=1
-            if self.compt%2 == 0:
+        if self.rect.x < self.x + 200 and self.left == True:
+            self.compt += 1
+            if self.compt % 2 == 0:
                 self.rect.x += 1
                 self.right = False
                 self.rect_bottom = pygame.Rect(self.rect.x + 5, self.rect.y + self.height - 2, self.long - 10, 1)
                 self.rect_high = pygame.Rect(self.rect.x + 5, self.rect.y, self.long - 10, 1)
                 self.rect_left = pygame.Rect(self.rect.x + 5, self.rect.y + 5, 1, self.height - 10)
                 self.rect_right = pygame.Rect(self.rect.x + self.long - 5, self.rect.y + 5, 1, self.height - 10)
-        elif self.rect.x == self.x+200 :
+        elif self.rect.x == self.x + 200:
             self.right = True
 
         if self.right == True and self.rect.x > self.x:
-            self.compt+=1
-            if self.compt%2 == 0:
+            self.compt += 1
+            if self.compt % 2 == 0:
                 self.rect.x -= 1
                 self.left = False
                 self.rect_bottom = pygame.Rect(self.rect.x + 5, self.rect.y + self.height - 2, self.long - 10, 1)
@@ -50,8 +55,6 @@ class Wall(pygame.sprite.Sprite):
             self.left = True
 
 
-
-
 # Class for Player
 class Player(pygame.sprite.Sprite):
 
@@ -59,9 +62,9 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.life = 1000
         self.beginn_life = 1000
-        self.velocity = 1
-        self.jump_velocity = 15
-        self.gravity = 1
+        self.velocity = round(ScreenHeight / 720 * 1.875)
+        self.jump_velocity = round(ScreenHeight / 720 * 10.5)
+        self.gravity = round(ScreenHeight / 720 * 1.9)
         self.image = pygame.image.load('images/stickman.png')
         self.rect = self.image.get_rect()
         self.rect.x = 50
@@ -70,15 +73,16 @@ class Player(pygame.sprite.Sprite):
         self.time = pygame.time.get_ticks()
         self.move_up_nbr = 0
         self.move_up_nbr2 = 0
-        self.nbr_image=6
-        self.nbr_image_left=0
-        self.nbr_image_left2=0
+        self.nbr_image = 6
+        self.nbr_image_left = 0
+        self.nbr_image_left2 = 0
         self.nbr_image_right = 0
         self.nbr_image_right2 = 0
         self.nbr_image_j = 9
         self.nbr_image_jump = 0
         self.nbr_image_jump2 = 0
         self.direction = ""
+
     # Movements functions :
 
     # Right
@@ -86,7 +90,8 @@ class Player(pygame.sprite.Sprite):
         self.direction = "right"
         self.nbr_image_right2 = str(self.nbr_image_right2)
         self.image = pygame.image.load(('images/run_right/rr' + self.nbr_image_right2 + '.png'))
-        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0] / 3), int(self.image.get_rect().size[1] / 3)))
+        self.image = pygame.transform.scale(self.image, (
+            round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3 )))
         self.rect.x += self.velocity
         self.nbr_image_right += 1
 
@@ -98,34 +103,39 @@ class Player(pygame.sprite.Sprite):
     def MoveRight(self):
         self.direction = "right"
         self.image = pygame.image.load('images/jr.png')
-        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0]/3),int(self.image.get_rect().size[1]/3)))
+        self.image = pygame.transform.scale(self.image, (
+            int(self.image.get_rect().size[0] / 3), int(self.image.get_rect().size[1] / 3)))
         self.rect.x += self.velocity
+
     # Left
     def MoveLeftTouching(self):
         self.direction = "left"
-        self.nbr_image_left2=str(self.nbr_image_left2)
-        self.image = pygame.image.load('images/run_left/rl'+self.nbr_image_left2+'.png')
-        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0]/3),int(self.image.get_rect().size[1]/3)))
+        self.nbr_image_left2 = str(self.nbr_image_left2)
+        self.image = pygame.image.load('images/run_left/rl' + self.nbr_image_left2 + '.png')
+        self.image = pygame.transform.scale(self.image, (
+            round(ScreenWidth/1080*self.image.get_rect().size[0]/3), round(ScreenHeight/720*self.image.get_rect().size[1]/3)))
         self.rect.x -= self.velocity
-        self.nbr_image_left+=1
+        self.nbr_image_left += 1
 
         if self.nbr_image_left == 50:
-            self.nbr_image_left=0
+            self.nbr_image_left = 0
         else:
-            self.nbr_image_left2=int(self.nbr_image_left/10)
+            self.nbr_image_left2 = int(self.nbr_image_left / 10)
 
     def MoveLeft(self):
         self.direction = "left"
         self.image = pygame.image.load('images/jl.png')
-        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0]/3),int(self.image.get_rect().size[1]/3)))
+        self.image = pygame.transform.scale(self.image, (
+            round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1]/3)))
         self.rect.x -= self.velocity
 
     # Up
     def MoveUp(self):
         self.image = pygame.image.load('images/jl.png')
-        self.image = pygame.transform.scale(self.image, (int(self.image.get_rect().size[0]/3),int(self.image.get_rect().size[1]/3)))
+        self.image = pygame.transform.scale(self.image, (
+            round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3 )))
         self.move_up_nbr += 1
-        self.move_up_nbr2 +=1
+        self.move_up_nbr2 += 1
         self.rect.y -= self.jump_velocity
 
     """def MoveUp(self):
@@ -148,21 +158,20 @@ class Player(pygame.sprite.Sprite):
     def MoveDown(self):
         self.rect.y += self.velocity
 
-
     # Gravity forces
     def Gravity(self):
-        if self.rect.y + self.rect.height < 720:
+        if self.rect.y + self.rect.height < ScreenHeight:
             self.rect.y += self.gravity
 
-    #life bar
+    # life bar
     def update_health_bar(self, surface):
-        #def a color for the life bar (lite green)
-        bar_color = (111,210,46)
+        # def a color for the life bar (lite green)
+        bar_color = (111, 210, 46)
         bar_color2 = (95, 95, 95)
-        #def rect of the bar, and the dimensions
-        bar_position = [self.rect.x, self.rect.y-20, self.life/10, 10]
+        # def rect of the bar, and the dimensions
+        bar_position = [self.rect.x, self.rect.y - 20, self.life / 10, 10]
         bar_position_begin = [self.rect.x, self.rect.y - 20, self.beginn_life / 10, 10]
-        #draw the bar
+        # draw the bar
         pygame.draw.rect(surface, bar_color2, bar_position_begin)
         pygame.draw.rect(surface, bar_color, bar_position)
 
@@ -174,13 +183,17 @@ class Gate(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.image.load('images/gate.jpg')
         self.image = pygame.transform.scale(self.image, (120, 180))
+        self.image = pygame.transform.scale(self.image,
+                                            (round(ScreenWidth / 1080 * 120), round(ScreenHeight / 720 * 180)))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
 
     def Collid(self):
         self.image = pygame.image.load('images/gate_open.jpg')
-        self.image = pygame.transform.scale(self.image, (120, 180))
+        self.image = pygame.transform.scale(self.image,
+                                            (round(ScreenWidth / 1080 * 120), round(ScreenHeight / 720 * 180)))
+
         self.mus = door("play")
 
 
@@ -190,41 +203,41 @@ class Pic(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         self.image = pygame.image.load('images/pic.jpg')
-        self.image = pygame.transform.scale(self.image, (50,30))
+        self.image = pygame.transform.scale(self.image,
+                                            (round(ScreenWidth / 1080 * 50), round(ScreenHeight / 720 * 30)))
         self.rect = self.image.get_rect()
         self.x = x
         self.rect.x = x
         self.rect.y = y
-        self.dead_rect = pygame.Rect(self.rect.x+13,self.rect.y,5,5)
+        self.dead_rect = pygame.Rect(self.rect.x + 13, self.rect.y, 5, 5)
         self.compt = 0
         self.left = False
         self.right = False
-    #if player touche the pic, he will be dead
+
+    # if player touche the pic, he will be dead
     def dead(self, player):
         if player.rect.colliderect(self.dead_rect):
-            player.life=0
+            player.life = 0
             self.mus = death("play")
 
-
     def Move(self, v):
-        if self.rect.x <self.x +200 and self.left == True:
-            self.compt+=1
-            if self.compt%v == 0:
+        if self.rect.x < self.x + 200 and self.left == True:
+            self.compt += 1
+            if self.compt % v == 0:
                 self.rect.x += 1
                 self.right = False
                 self.dead_rect = pygame.Rect(self.rect.x + 13, self.rect.y, 5, 5)
-        elif self.rect.x == self.x+200 :
+        elif self.rect.x == self.x + 200:
             self.right = True
 
         if self.right == True and self.rect.x > self.x:
-            self.compt+=1
-            if self.compt%v == 0:
+            self.compt += 1
+            if self.compt % v == 0:
                 self.rect.x -= 1
                 self.left = False
                 self.dead_rect = pygame.Rect(self.rect.x + 13, self.rect.y, 5, 5)
         elif self.rect.x == self.x:
             self.left = True
-
 
 
 # Class for the Turret
@@ -239,7 +252,7 @@ class Gun(pygame.sprite.Sprite):
         self.rect.y = 600
         self.all_bullet = pygame.sprite.Group()
 
-    #launch bullet from the gun
+    # launch bullet from the gun
     def launch_bullet(self):
         """Creates a bullet and stocks it in a sprite group"""
         self.all_bullet.add(Bullet(self))

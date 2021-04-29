@@ -2,6 +2,11 @@ from objets import *
 from functions import *
 import time
 from Sounds import music
+from Setting import resolution
+
+ScreenWidth = resolution()[0]
+ScreenHeight = resolution()[1]
+
 
 def game7():
     music("play")
