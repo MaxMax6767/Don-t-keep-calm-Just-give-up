@@ -106,7 +106,7 @@ class Player(pygame.sprite.Sprite):
         self.direction = "right"
         self.image = pygame.image.load('images/jr.png')
         self.image = pygame.transform.scale(self.image, (
-            int(self.image.get_rect().size[0] / 3), int(self.image.get_rect().size[1] / 3)))
+            round(ScreenWidth/1080*self.image.get_rect().size[0]/3), round(ScreenHeight/720*self.image.get_rect().size[1]/3)))
         self.rect.x += self.velocity
 
     # Left
@@ -135,8 +135,7 @@ class Player(pygame.sprite.Sprite):
     def MoveUp(self):
         self.image = pygame.image.load('images/jl.png')
         self.image = pygame.transform.scale(self.image, (
-            round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3 )))
-        self.move_up_nbr += 1
+            round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3)))
         self.move_up_nbr2 += 1
         self.rect.y -= self.jump_velocity
 

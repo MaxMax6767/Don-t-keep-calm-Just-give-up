@@ -100,7 +100,6 @@ def game1():
                     play = False
                     break
 
-            print(player.nbr_image_right, player.nbr_image_right2)
             # If player live too low, game ends
             if player.life == 0:
                 play=False
