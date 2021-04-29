@@ -20,10 +20,10 @@ def mouvements(player, wall, wall_bas, wall_porte, wall3):
         else:
             if player.direction == "left":
                 player.image = pygame.image.load('images/run_left/rl4.png')
-                player.image = pygame.transform.scale(player.image, (100,100))
+                player.image = pygame.transform.scale(player.image, (round(ScreenWidth/1080*100),round(ScreenHeight/720*100)))
             else:
                 player.image = pygame.image.load('images/run_right/rr4.png')
-                player.image = pygame.transform.scale(player.image, (100, 100))
+                player.image = pygame.transform.scale(player.image, (round(ScreenWidth/1080*100), round(ScreenHeight/720*100)))
 
     # right movement for right key pressed except if there's a wall on the right
     elif player.pressed.get(moveRight()) and player.rect.x + player.rect.width < ScreenWidth:

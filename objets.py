@@ -90,8 +90,7 @@ class Player(pygame.sprite.Sprite):
         self.direction = "right"
         self.nbr_image_right2 = str(self.nbr_image_right2)
         self.image = pygame.image.load(('images/run_right/rr' + self.nbr_image_right2 + '.png'))
-        self.image = pygame.transform.scale(self.image, (
-            round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3 )))
+        self.image = pygame.transform.scale(self.image, (round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] / 3)))
         self.rect.x += self.velocity
         self.nbr_image_right += 1
 
@@ -103,8 +102,7 @@ class Player(pygame.sprite.Sprite):
     def MoveRight(self):
         self.direction = "right"
         self.image = pygame.image.load('images/jr.png')
-        self.image = pygame.transform.scale(self.image, (
-            int(self.image.get_rect().size[0] / 3), int(self.image.get_rect().size[1] / 3)))
+        self.image = pygame.transform.scale(self.image, (round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] / 3)))
         self.rect.x += self.velocity
 
     # Left
@@ -112,8 +110,7 @@ class Player(pygame.sprite.Sprite):
         self.direction = "left"
         self.nbr_image_left2 = str(self.nbr_image_left2)
         self.image = pygame.image.load('images/run_left/rl' + self.nbr_image_left2 + '.png')
-        self.image = pygame.transform.scale(self.image, (
-            round(ScreenWidth/1080*self.image.get_rect().size[0]/3), round(ScreenHeight/720*self.image.get_rect().size[1]/3)))
+        self.image = pygame.transform.scale(self.image, (round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] / 3)))
         self.rect.x -= self.velocity
         self.nbr_image_left += 1
 
@@ -125,15 +122,13 @@ class Player(pygame.sprite.Sprite):
     def MoveLeft(self):
         self.direction = "left"
         self.image = pygame.image.load('images/jl.png')
-        self.image = pygame.transform.scale(self.image, (
-            round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1]/3)))
+        self.image = pygame.transform.scale(self.image, (round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] / 3)))
         self.rect.x -= self.velocity
 
     # Up
     def MoveUp(self):
         self.image = pygame.image.load('images/jl.png')
-        self.image = pygame.transform.scale(self.image, (
-            round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3 )))
+        self.image = pygame.transform.scale(self.image, (round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3 )))
         self.move_up_nbr += 1
         self.move_up_nbr2 += 1
         self.rect.y -= self.jump_velocity
@@ -157,11 +152,14 @@ class Player(pygame.sprite.Sprite):
     # Down
     def MoveDown(self):
         self.rect.y += self.velocity
+        self.image = pygame.image.load('images/jr.png')
+        self.image = pygame.transform.scale(self.image, (round(ScreenWidth / 1080 * self.image.get_rect().size[0] /3), round(ScreenHeight / 720 * self.image.get_rect().size[1] / 3)))
 
     # Gravity forces
     def Gravity(self):
         if self.rect.y + self.rect.height < ScreenHeight:
             self.rect.y += self.gravity
+
 
     # life bar
     def update_health_bar(self, surface):
