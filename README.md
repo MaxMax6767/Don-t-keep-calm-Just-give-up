@@ -1,5 +1,7 @@
 # Don't keep calm, Just give up !
 
+## Jeu Python : 
+
 ### Language : 
 * Python 
 
@@ -21,16 +23,16 @@ Jeu style *Give UP* : **Die & Retry**
   - [x] Room 4
   - [x] Room 5
   - [x] Room 6
-  - [ ] Room 7
-  - [ ] Room 8
-  - [ ] Room 9
-  - [ ] Room 10
+  - [x] Room 7
+  - [x] Room 8
+  - [x] Room 9
+  - [x] Room 10
 
 ### Objets : 
-- Personnage
-- Blocs **Immobiles**
-- Blocs **Mobiles**
-- Pics (ou quelque chose ou tu te fais mal si tu reste dessus genre des ronces)
+- [x] Personnage
+- [x] Blocs **Immobiles**
+- [x] Blocs **Mobiles**
+- [x] Pics 
 
 ### Évolutions a venir si le projet arrive a ses fins :
 - Niveau 2 :
@@ -47,29 +49,55 @@ Jeu style *Give UP* : **Die & Retry**
 - Arbalète / tourelle (ou quelque chose qui te suis du regard en voulant te tuer) 
 
 ### Répartition des tâches:
-- Lena S : 
-    - Design des niveaux
-    - Animation 
-    - Textures
+
+- Lena S :
+    - Animation :
+         * [x] Personnage
+    - Textures :
+         * [x] Porte
+         * [x] Pics
+         * [x] Personnage
 
 - Matteo M : 
-    - Menu :
-        * Démarrer
-        * Paramètres
-            * Résolution
-            * Contrôles
+    - Site Web :
+         * [x] SSL à jour
+         * [x] Barre Progression
+         * [x] Sécurité
+    - Sons & Musiques :
+         * [x] Musique Principale
+         * [x] Son de porte
+         * [x] Son de mort
 
 - Corentin P : 
-    - Création objets 
-    - Collisions
-    - Mouvements
-    - Gestions événements 
+    - Design des niveaux:
+         * [x] Room 1 - 10
+    - Collisions : 
+         * [x] Cadre de jeu
+         * [x] Platformes
+         * [x] Fin de niveau
+         * [x] Objets mort
+    - Mouvements :
+         * [x] Saut
+         * [x] Gravité
+    - Gestions événements :
+         * [x] Fin de niveau
+         * [x] Mort
 
 - Maxime G : 
-    - Création objets 
-    - Collisions 
-    - Mouvements 
-    - Gestions événements 
+    - Launcher : 
+         * Parametres :
+              - [x] Mouvements
+              - [x] Résolution
+              - [x] Son
+              - [x] Musique
+         * Crédits : 
+              - [x] Site Web
+              - [ ] Repo Github
+              - [ ] Serveur Discord
+    - Adaptibilité :
+         * [x] Controles
+         * [x] Résolution
+         * [x] Gestion du son & Musique
     - **Fusion Projet**
 
 
@@ -77,11 +105,42 @@ Jeu style *Give UP* : **Die & Retry**
 
 This fils is only there for [PyCharm](https://www.jetbrains.com/fr-fr/pycharm/) in order to simplify the installation of the [PyGame](https://www.pygame.org/news) module :)
 
+Modules used : 
+- Pygame
+- time
+- json
+
 **Python Support**
 
-| Version | State         |
+| Version | Etat          |
 |      --:|:--            |
-| 3.9     | Supported     |
-| 3.8     | Supported     |
-| 3.7     | Supported     |
-| < 3.7   | Not Tested    |
+| 3.9     | Ok            |
+| 3.8     | Ok            |
+| 3.7     | Ok            |
+| < 3.7   | Non Testé     |
+
+
+## Launcher :
+
+**Processing IDE Support (Non Compilé)**
+
+| Version | Etat          |
+|      --:|:--            |
+| 3.5.4   | Ok            |
+| 3.5.3   | Ok            |
+| 2.2.1   | Non Testé     |
+| 1.5.1   | Non Testé     |
+
+**Modules :**
+
+- [ControlP5](http://www.sojamo.de/libraries/controlP5/)
+- Processing Sounds
+- Java Utils (Pour listes)
+- [Deadpixel Command](https://github.com/GoToLoop/command/blob/patch-1/src/deadpixel/command/Command.java)
+
+
+## Site Web : 
+
+- Hébergeur : [InfinityFree](https://infinityfree.net/)
+- Certificats SSL : [GoGetSSL](https://www.gogetssl.com/)
+- système de gestion de contenu : [WordPress](https://wordpress.com/fr/)
