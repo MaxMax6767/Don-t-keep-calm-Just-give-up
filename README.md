@@ -15,12 +15,12 @@ Jeu style *Give UP* : **Die & Retry**
 
 ### Contenu : 
 - Niveau 1 :
-  - ✔ Room 1
-  - ✔ Room 2
-  - ✔ Room 3
-  - ✔ Room 4
-  - ✔ Room 5
-  - ✔ Room 6
+  - [x] Room 1
+  - [x] Room 2
+  - [x] Room 3
+  - [x] Room 4
+  - [x] Room 5
+  - [x] Room 6
   - [ ] Room 7
   - [ ] Room 8
   - [ ] Room 9
@@ -28,14 +28,12 @@ Jeu style *Give UP* : **Die & Retry**
 
 ### Objets : 
 - Personnage
-- Limites de jeu (Bordures de fenêtre)
 - Blocs **Immobiles**
 - Blocs **Mobiles**
 - Pics (ou quelque chose ou tu te fais mal si tu reste dessus genre des ronces)
-- Arbalète / tourelle (ou quelque chose qui te suis du regard en voulant te tuer) 
 
 ### Évolutions a venir si le projet arrive a ses fins :
-- Niveau 1 :
+- Niveau 2 :
   - [ ] Room 11
   - [ ] Room 12
   - [ ] Room 13
@@ -46,6 +44,7 @@ Jeu style *Give UP* : **Die & Retry**
   - [ ] Room 18
   - [ ] Room 19
   - [ ] Room 20
+- Arbalète / tourelle (ou quelque chose qui te suis du regard en voulant te tuer) 
 
 ### Répartition des tâches:
 - Lena S : 
