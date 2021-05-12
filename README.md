@@ -15,7 +15,7 @@ Jeu style *Give UP* : **Die & Retry**
 
 ### Contenu : 
 - Niveau 1 :
-  - [ ] Room 1
+  - [✔] Room 1
   - [ ] Room 2
   - [ ] Room 3
   - [ ] Room 4
