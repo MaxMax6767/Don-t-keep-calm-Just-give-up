@@ -14,7 +14,7 @@ def game9():
     pygame.init()
 
     # Creates a window and gives it a name
-    screen = pygame.display.set_mode((1080, 720))
+    screen = pygame.display.set_mode((ScreenWidth, ScreenHeight))
     pygame.display.set_caption("Don't keep calm, Just give UP !")
 
     # Loads Background
@@ -25,7 +25,7 @@ def game9():
 
     # Loads the font
     arial_font = pygame.font.SysFont("arial", 40, True, True)
-    arial_font2 = pygame.font.SysFont("arial", 200, True, white_color)
+    arial_font2 = pygame.font.SysFont("arial", round(ScreenWidth/1080*200), True, white_color)
     texte_gagne = arial_font.render("You won !", True, white_color)
     texte_lose = arial_font.render("You're dead... ", True, white_color)
     texte_trap = arial_font.render("It's a Trap ", True, white_color)

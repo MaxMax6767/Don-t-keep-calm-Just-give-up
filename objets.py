@@ -106,7 +106,7 @@ class Player(pygame.sprite.Sprite):
         self.direction = "right"
         self.image = pygame.image.load('images/jr.png')
         self.image = pygame.transform.scale(self.image, (
-            round(ScreenWidth/1080*self.image.get_rect().size[0]/3), round(ScreenHeight/720*self.image.get_rect().size[1]/3)))
+            round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] / 3)))
         self.rect.x += self.velocity
 
     # Left
