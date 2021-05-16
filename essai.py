@@ -7,6 +7,7 @@ from Setting import resolution
 ScreenWidth = resolution()[0]
 ScreenHeight = resolution()[1]
 
+# Room used to fiddle with the resolution addaptative game (Unused in the final game)
 
 def game_e():
     global change

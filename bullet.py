@@ -1,10 +1,12 @@
 import pygame
 
 
+# This object is not used just yet, it will come in future updates
+
 # Class for the gun's bullets
 class Bullet(pygame.sprite.Sprite):
 
-    def __init__(self, gun):
+    def __init__(self):
         super().__init__()
         self.image = pygame.image.load('images/bullet.jpg')
         self.image = pygame.transform.scale(self.image, (10, 5))

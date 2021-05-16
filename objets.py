@@ -59,6 +59,9 @@ class Wall(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
 
     def __init__(self):
+        """
+        Sets all informations about the Player object and handles the sprite animations
+        """
         super().__init__()
         self.life = 1000
         self.beginn_life = 1000
@@ -171,7 +174,7 @@ class Gate(pygame.sprite.Sprite):
         self.mus = door("play")
 
 
-# Class for the Pic
+# Class for the spike
 class Pic(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
@@ -188,7 +191,7 @@ class Pic(pygame.sprite.Sprite):
         self.left = False
         self.right = False
 
-    # if player touche the pic, he will be dead
+    # Death collision for the player if contact ith the spike is made
     def dead(self, player):
         if player.rect.colliderect(self.dead_rect):
             player.life = 0
@@ -214,7 +217,7 @@ class Pic(pygame.sprite.Sprite):
             self.left = True
 
 
-# Class for the Turret
+# Class for the Turret (Unused as of now)
 class Gun(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
@@ -229,29 +232,4 @@ class Gun(pygame.sprite.Sprite):
     # launch bullet from the gun
     def launch_bullet(self):
         """Creates a bullet and stocks it in a sprite group"""
-        self.all_bullet.add(Bullet(self))
-
-
-"""# Class for Restart button
-class Restart(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.image.load('images/restart.png')
-        self.rect = self.image.get_rect()
-        self.rect.x = 600
-        self.rect.y = 350
-        self.clickable_area = pygame.Rect(600, 350, 350, 150)
-
-
-# Class for Quit button
-class Quit(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.image.load('images/quit.png')
-        self.rect = self.image.get_rect()
-        self.rect.x = 225
-        self.rect.y = 350
-        self.clickable_area = pygame.Rect(225, 350, 350, 150)
-
-    def clique(self):
-        pygame.quit()"""
+        self.all_bullet.add(Bullet())

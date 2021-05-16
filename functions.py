@@ -2,6 +2,8 @@ import pygame
 from Setting import resolution
 from Setting import moveLeft, moveDown, moveRight, moveUp
 
+
+# Syntax simplification for resolution
 ScreenWidth = resolution()[0]
 ScreenHeight = resolution()[1]
 

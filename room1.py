@@ -4,47 +4,42 @@ import time
 from Sounds import music
 from Setting import resolution
 
+# Syntax simplification for the resolutions (It's used frequently)
 ScreenWidth = resolution()[0]
 ScreenHeight = resolution()[1]
 
 
 def game1():
-    global change
-    music("play")
-    # Starts the Pygame Library
-    pygame.init()
+    global change  # Global variable for the end of the level
+    music("play")  # Starts the music
+    pygame.init()  # Starts the Pygame Library
 
-    # Creates a window and gives it a name
-    screen = pygame.display.set_mode((ScreenWidth, ScreenHeight))
-    pygame.display.set_caption("Don't keep calm, Just give UP !")
+    screen = pygame.display.set_mode((ScreenWidth, ScreenHeight))  # Create a window and sets screen size
+    pygame.display.set_caption("Don't keep calm, Just give UP !")  # Sets window name
 
-    # Loads Background
-    background = pygame.image.load('images/black.png')
+    background = pygame.image.load('images/black.png')  # Loads Background (in thos case a plane black picture)
 
-    # Creates a variable for text color
-    white_color = (255, 255, 255)
+    white_color = (255, 255, 255)  # Syntax simplification for white color
 
-    # Loads the font
+    # Initialises the fonts used
     arial_font = pygame.font.SysFont("arial", 40, True, True)
     arial_font2 = pygame.font.SysFont("arial", round(ScreenWidth/1080*200), True, white_color)
     texte_gagne = arial_font.render("You won !", True, white_color)
     texte_lose = arial_font.render("You're dead... ", True, white_color)
 
+    player = Player()  # Creates the player object
 
-    # Creates an object for the Player
-    player = Player()
-
-    # Add walls to the sprite group
+    # Add walls to the sprite group (Using screen size adaptive method)
     wall_begin = Wall(round(ScreenWidth/1080*60), round(ScreenHeight/720*170), round(ScreenWidth/1080*150), round(ScreenHeight/720*15))
     wall2 = Wall(round(ScreenWidth/1080*580), round(ScreenHeight/720*500), round(ScreenWidth/1080*200), round(ScreenHeight/720*15))
     wall_bas = Wall(0, (ScreenHeight-round(ScreenHeight/720*15)), ScreenWidth, round(ScreenHeight/720*15))
     wall3 = Wall(10000, 0, 1, 1)
 
     # creates a door object
-    gate = Gate(round(ScreenWidth/1080*930), round(ScreenHeight/720*550))
-    gate_collid = False
+    gate = Gate(round(ScreenWidth/1080*930), round(ScreenHeight/720*550))  # Places the gate at a given coordinate depending on the resolution gotout of the settings
+    gate_collid = False  # Sets the collision to false by default
 
-    #creates a pic object
+    #creates a spike object
     pic = Pic(round(ScreenWidth/1080*620), ScreenHeight-(round(ScreenHeight/720*15+round(ScreenHeight/720*30))))
     pic2 = Pic(round(ScreenWidth/1080*820), ScreenHeight-(round(ScreenHeight/720*15+round(ScreenHeight/720*30))))
 
@@ -53,14 +48,14 @@ def game1():
     play = True
     win = False
 
-    # time at the begining of the game
-    time1 = time.perf_counter()
+    time1 = time.perf_counter()  # Time counter
 
     # Game loop
     while launched:
 
-        while play == True:
-            #put images on the screen
+        while play:
+
+            # Display images on the screen
             screen.blit(background, (0, 0))
             screen.blit(gate.image, gate.rect)
             screen.blit(pic.image, pic.rect)
@@ -70,22 +65,19 @@ def game1():
             screen.blit(wall_begin.image, wall_begin.rect)
             screen.blit(player.image, player.rect)
 
-
-
-            # create and show the time
+            # Create and show the time
             time_run = int(time.perf_counter())
             time_run_str = str(time_run)
             show_time = arial_font.render(time_run_str, True, white_color)
             screen.blit(show_time, (0, 0))
 
-            mouvements(player, wall_begin, wall_bas, wall2, wall3)
+            mouvements(player, wall_begin, wall_bas, wall2, wall3)  # Initialises player movements
 
-            #if player touch a pic, he's dead! ;-)
+            # Checks for collision with player
             pic.dead(player)
             pic2.dead(player)
 
-
-            #if player touch a wall, he can fly a new time
+            # Resets player juming ability if he touches floor
             if player.rect.colliderect(wall_bas.rect_high) or player.rect.colliderect(wall_begin.rect_high) or player.rect.colliderect(wall2.rect_high):
                 player.move_up_nbr2 = 0
 
@@ -100,7 +92,7 @@ def game1():
                     play = False
                     break
 
-            # If player live too low, game ends
+            # Game end if player is dead
             if player.life == 0:
                 play=False
                 break
@@ -123,12 +115,9 @@ def game1():
                 # If there's no new input, empty the list
                 elif event.type == pygame.KEYUP:
                     player.pressed[event.key] = False
-                """elif event.type == pygame.MOUSEMOTION:
-                    # print the position of the mouse
-                    print(event.pos)"""
 
         # Exit point collisions
-        if win == True:
+        if win:
             break
         if player.life == 0:
             end = time.time()+1.5
