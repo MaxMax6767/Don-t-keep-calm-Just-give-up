@@ -34,22 +34,22 @@ def game10():
     player = Player()
 
     # Add walls to the sprite group
-    wall_begin = Wall(60, 170, 150, 15)
-    wall2 = Wall(900, 500, 200, 15)
-    wall_bas = Wall(0, 700, 1080, 20)
-    wall3 = Wall(0, 400, 150, 15)
+    wall_begin = Wall(round(ScreenWidth/1080*60), round(ScreenHeight/720*170), round(ScreenWidth/1080*150), round(ScreenHeight/720*15))
+    wall2 = Wall(round(ScreenWidth/1080*900), round(ScreenHeight/720*500), round(ScreenWidth/1080*200), round(ScreenHeight/720*15))
+    wall_bas = Wall(0, round(ScreenHeight/720*700), round(ScreenWidth/1080*1080), round(ScreenHeight/720*20))
+    wall3 = Wall(0, round(ScreenHeight/720*400), round(ScreenWidth/1080*150), round(ScreenHeight/720*15))
 
     # creates a False door object
-    gate = Gate(930, 550)
+    gate = Gate(round(ScreenWidth/1080*930), round(ScreenHeight/720*550))
     gate_collid = False
 
     #creates a pic object
-    pic = Pic(620,670)
-    pic2 = Pic(720, 670)
-    pic3 = Pic(820, 670)
-    pic4 = Pic(920, 470)
-    pic5 = Pic(170, 670)
-    pic6 = Pic(70,370)
+    pic = Pic(round(ScreenWidth/1080*620), round(ScreenHeight/720*670))
+    pic2 = Pic(round(ScreenWidth/1080*720), round(ScreenHeight/720*670))
+    pic3 = Pic(round(ScreenWidth/1080*820), round(ScreenHeight/720*670))
+    pic4 = Pic(round(ScreenWidth/1080*920), round(ScreenHeight/720*470))
+    pic5 = Pic(round(ScreenWidth/1080*170), round(ScreenHeight/720*670))
+    pic6 = Pic(round(ScreenWidth/1080*70), round(ScreenHeight/720*370))
 
 
     # Game launching variable
@@ -151,7 +151,7 @@ def game10():
         if player.life == 0:
             end = time.time()+1.5
             while end>time.time():
-                screen.blit(texte_lose, (250, 300))
+                screen.blit(texte_lose, (round(ScreenWidth/1080*250), round(ScreenHeight/720*300)))
                 # Screen Update
                 pygame.display.flip()
             return False, False
@@ -172,9 +172,9 @@ def game10():
         # During 2 seconds we can see the door open and a win text
         while time.time()<end:
             gate.image = pygame.image.load('images/gate_open.jpg')
-            gate.image = pygame.transform.scale(gate.image, (120, 180))
+            gate.image = pygame.transform.scale(gate.image, (round(ScreenWidth/1080*120), round(ScreenHeight/720*180)))
             screen.blit(gate.image, gate.rect)
-            screen.blit(texte_gagne, (300, 300))
+            screen.blit(texte_gagne, (round(ScreenWidth/1080*300), round(ScreenHeight/720*300)))
 
             pygame.display.flip()
 
@@ -189,7 +189,7 @@ def game10():
             while time.time() < level_up_time:
                 texte_level_up = arial_font2.render("You Win!", True, white_color)
                 screen.fill((0, 0, 0))
-                screen.blit(texte_level_up, (100, 200))
+                screen.blit(texte_level_up, (round(ScreenWidth/1080*100), round(ScreenHeight/720*200)))
                 pygame.display.flip()
                 for event in pygame.event.get():
                     # Game closing with ALT + F4 or windows X

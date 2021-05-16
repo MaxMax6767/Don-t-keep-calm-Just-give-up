@@ -1,12 +1,7 @@
-from room7 import *
+
 from room8 import *
 from room9 import *
 from room10 import *
-
-
-room7= game7()
-while room7[0]!=True:
-    room7=game7()
 
 room8= game8()
 while room8[0]!=True:
