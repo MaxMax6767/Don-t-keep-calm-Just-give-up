@@ -21,20 +21,24 @@ class Wall(pygame.sprite.Sprite):
         self.height = height
         self.rect.x = x
         self.rect.y = y
+        #rect for collisions with the player
         self.rect_bottom = pygame.Rect(self.rect.x + 5, self.rect.y + self.height - 2, self.long - 10, 1)
         self.rect_high = pygame.Rect(self.rect.x + 5, self.rect.y, self.long - 10, 1)
         self.rect_left = pygame.Rect(self.rect.x + 5, self.rect.y + 5, 1, self.height - 10)
         self.rect_right = pygame.Rect(self.rect.x + self.long - 5, self.rect.y + 5, 1, self.height - 10)
+        #variable for the move function
         self.right = False
         self.left = False
         self.compt = 0
 
     def Move(self):
+        #wall moves right and when it's 200 more pixels, it moves to left
         if self.rect.x < self.x + 200 and self.left == True:
             self.compt += 1
             if self.compt % 2 == 0:
                 self.rect.x += 1
                 self.right = False
+                ##rect for collisions with the player
                 self.rect_bottom = pygame.Rect(self.rect.x + 5, self.rect.y + self.height - 2, self.long - 10, 1)
                 self.rect_high = pygame.Rect(self.rect.x + 5, self.rect.y, self.long - 10, 1)
                 self.rect_left = pygame.Rect(self.rect.x + 5, self.rect.y + 5, 1, self.height - 10)
@@ -47,6 +51,7 @@ class Wall(pygame.sprite.Sprite):
             if self.compt % 2 == 0:
                 self.rect.x -= 1
                 self.left = False
+                # rect for collisions with the player
                 self.rect_bottom = pygame.Rect(self.rect.x + 5, self.rect.y + self.height - 2, self.long - 10, 1)
                 self.rect_high = pygame.Rect(self.rect.x + 5, self.rect.y, self.long - 10, 1)
                 self.rect_left = pygame.Rect(self.rect.x + 5, self.rect.y + 5, 1, self.height - 10)
@@ -63,17 +68,20 @@ class Player(pygame.sprite.Sprite):
         Sets all informations about the Player object and handles the sprite animations
         """
         super().__init__()
+        # Velocity and life of the player
         self.life = 1000
         self.beginn_life = 1000
         self.velocity = round(ScreenHeight / 720 * 1.875)
         self.jump_velocity = round(ScreenHeight / 720 * 10.5)
         self.gravity = round(ScreenHeight / 720 * 1.9)
+        # Image and coordinates
         self.image = pygame.image.load('images/run_right/rr4.png')
         self.image = pygame.transform.scale(self.image, (
             round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3 )))
         self.rect = self.image.get_rect()
         self.rect.x = 50
         self.rect.y = 0
+        # Player variables (for functions)
         self.pressed = {1073741904: False, 1073741903: False, 1073741906: False}
         self.time = pygame.time.get_ticks()
         self.move_up_nbr = 0
@@ -90,7 +98,7 @@ class Player(pygame.sprite.Sprite):
 
     # Movements functions :
 
-    # Right
+    # Right when player touches a wall
     def MoveRightTouching(self):
         self.direction = "right"
         self.nbr_image_right2 = str(self.nbr_image_right2)
@@ -105,6 +113,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.nbr_image_right2 = int(self.nbr_image_right / 10)
 
+    # Right when player is flying
     def MoveRight(self):
         self.direction = "right"
         self.image = pygame.image.load('images/jr.png')
@@ -112,7 +121,7 @@ class Player(pygame.sprite.Sprite):
             round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] / 3)))
         self.rect.x += self.velocity
 
-    # Left
+    # Left when player touches a wall
     def MoveLeftTouching(self):
         self.direction = "left"
         self.nbr_image_left2 = str(self.nbr_image_left2)
@@ -127,6 +136,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.nbr_image_left2 = int(self.nbr_image_left / 10)
 
+    # Left when player is flying
     def MoveLeft(self):
         self.direction = "left"
         self.image = pygame.image.load('images/jl.png')
@@ -158,6 +168,7 @@ class Gate(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__()
+        # Load image and coordinates
         self.image = pygame.image.load('images/gate.jpg')
         self.image = pygame.transform.scale(self.image, (120, 180))
         self.image = pygame.transform.scale(self.image,
@@ -166,11 +177,12 @@ class Gate(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+    # Collision with player
     def Collid(self):
         self.image = pygame.image.load('images/gate_open.jpg')
         self.image = pygame.transform.scale(self.image,
                                             (round(ScreenWidth / 1080 * 120), round(ScreenHeight / 720 * 180)))
-
+        # Sound of the door
         self.mus = door("play")
 
 
@@ -179,6 +191,7 @@ class Pic(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__()
+        # Load image and coordinates
         self.image = pygame.image.load('images/pic.jpg')
         self.image = pygame.transform.scale(self.image,
                                             (round(ScreenWidth / 1080 * 50), round(ScreenHeight / 720 * 30)))
@@ -186,6 +199,7 @@ class Pic(pygame.sprite.Sprite):
         self.x = x
         self.rect.x = x
         self.rect.y = y
+        # Rect for the collision with the player
         self.dead_rect = pygame.Rect(self.rect.x + 13, self.rect.y, 5, 5)
         self.compt = 0
         self.left = False
@@ -197,6 +211,7 @@ class Pic(pygame.sprite.Sprite):
             player.life = 0
             self.mus = death("play")
 
+    #Pic can move with this function
     def Move(self, v):
         if self.rect.x < self.x + 200 and self.left == True:
             self.compt += 1
@@ -222,6 +237,7 @@ class Gun(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__()
+        # Load image and coordinates
         self.image = pygame.image.load('images/gun.png')
         self.image = pygame.transform.scale(self.image, (100, 90))
         self.rect = self.image.get_rect()

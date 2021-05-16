@@ -1,14 +1,14 @@
-from room9 import *
-from room10 import *
+from room1_demo import *
+from room2_demo import *
 
-# Testing code launcher
+#demo for all people
 
-room9 = game9()
-while not room9[0]:
-    room9 = game9()
+room = game1()
+while not room[0]:
+    room = game1()
 
-room10 = game10()
-while not room10[0]:
-    room10 = game10()
+room2 = game2()
+while not room2[0]:
+    room2 = game2()
 
 music("stop")

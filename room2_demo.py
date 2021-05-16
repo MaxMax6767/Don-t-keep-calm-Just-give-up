@@ -31,6 +31,7 @@ def game2():
     wall = Wall(120, 370, 200, 15)
     wall_bas = Wall(0, 700, 1080, 20)
     wall_porte = Wall(800, 245, 250, 20)
+    wall3 = Wall(10000, 0, 1, 1)
 
     # creates a door object
     gate = Gate(900, 65)
@@ -74,7 +75,7 @@ def game2():
             show_time = arial_font.render(time_run_str, True, white_color)
             screen.blit(show_time, (0, 0))
 
-            mouvements(player, wall, wall_bas, wall_porte)
+            mouvements(player, wall, wall_bas, wall_porte,wall3)
 
             #if player touch a pic, he's dead! ;-)
             pic.dead(player)

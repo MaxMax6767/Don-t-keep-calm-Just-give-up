@@ -2,11 +2,11 @@
   "movementDown": "K_DOWN",
   "SoundsVolumeMute": false,
   "movementJump": "K_UP",
-  "displayresHeight": 900,
+  "displayresHeight": 720,
   "SoundsVolume": 15.68103790283203,
   "MusicVolumeMute": false,
   "MusicVolume": 15.077587127685547,
   "movementStrafeLeft": "K_LEFT",
   "movementStrafeRight": "K_RIGHT",
-  "displayResWidth": 1350
+  "displayResWidth": 1080
 }
