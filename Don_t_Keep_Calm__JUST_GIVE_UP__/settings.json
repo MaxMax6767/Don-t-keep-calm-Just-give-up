@@ -1,0 +1,16 @@
+{
+  "movementDown": "K_a",
+  "displayFrameRate": 60,
+  "displaySelector": 0,
+  "displayFullscreen": 0,
+  "SoundsVolumeMute": false,
+  "movementJump": "K_a",
+  "displayresHeight": 576,
+  "SoundsVolume": 5.1724138259887695,
+  "MusicVolumeMute": false,
+  "MusicVolume": 90.0862045288086,
+  "launchMode": 1,
+  "movementStrafeLeft": "K_a",
+  "movementStrafeRight": "K_a",
+  "displayResWidth": 864
+}
