@@ -79,10 +79,15 @@ Jeu style *Give UP* : **Die & Retry**
     - Mouvements :
          * [x] Saut
          * [x] Gravité
+         * [x] Droite/Gauche
     - Gestions événements :
          * [x] Fin de niveau
          * [x] Mort
-
+    - Objets : 
+         * [x] Joueur 
+         * [x] Pic 
+         * [x] Mur 
+         * [x] Porte 
 - Maxime G : 
     - Launcher : 
          * Parametres :
