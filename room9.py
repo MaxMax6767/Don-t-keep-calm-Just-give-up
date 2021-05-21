@@ -41,7 +41,7 @@ def game9():
                       round(ScreenHeight / 720 * 15))
     wall2 = Wall(round(ScreenWidth / 1080 * 900), round(ScreenHeight / 720 * 500), round(ScreenWidth / 1080 * 200),
                  round(ScreenHeight / 720 * 15))
-    wall_bas = Wall(0, round(ScreenHeight / 720 * 700), ScreenHeight, round(ScreenHeight / 720 * 20))
+    wall_bas = Wall(0, round(ScreenHeight/720*700), round(ScreenWidth/1080*1080), round(ScreenHeight/720*20))
     wall3 = Wall(0, round(ScreenHeight / 720 * 400), round(ScreenWidth / 1080 * 150), round(ScreenHeight / 720 * 15))
 
     # creates a False door object
