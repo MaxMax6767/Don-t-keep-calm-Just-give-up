@@ -2,6 +2,7 @@ from bullet import *
 from Sounds import *
 from Setting import resolution
 
+#set variables for the screen resolution
 ScreenWidth = resolution()[0]
 ScreenHeight = resolution()[1]
 
@@ -38,7 +39,7 @@ class Wall(pygame.sprite.Sprite):
             if self.compt % 2 == 0:
                 self.rect.x += 1
                 self.right = False
-                ##rect for collisions with the player
+                #rect for collisions with the player
                 self.rect_bottom = pygame.Rect(self.rect.x + 5, self.rect.y + self.height - 2, self.long - 10, 1)
                 self.rect_high = pygame.Rect(self.rect.x + 5, self.rect.y, self.long - 10, 1)
                 self.rect_left = pygame.Rect(self.rect.x + 5, self.rect.y + 5, 1, self.height - 10)
@@ -108,6 +109,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.velocity
         self.nbr_image_right += 1
 
+        # change images for the mouvements
         if self.nbr_image_right == 50:
             self.nbr_image_right = 0
         else:
@@ -131,6 +133,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.x -= self.velocity
         self.nbr_image_left += 1
 
+        #change images for the mouvements
         if self.nbr_image_left == 50:
             self.nbr_image_left = 0
         else:
@@ -213,6 +216,7 @@ class Pic(pygame.sprite.Sprite):
 
     #Pic can move with this function
     def Move(self, v):
+        # go right
         if self.rect.x < self.x + 200 and self.left == True:
             self.compt += 1
             if self.compt % v == 0:
@@ -222,6 +226,7 @@ class Pic(pygame.sprite.Sprite):
         elif self.rect.x == self.x + 200:
             self.right = True
 
+        # go left
         if self.right == True and self.rect.x > self.x:
             self.compt += 1
             if self.compt % v == 0:

@@ -44,10 +44,6 @@ pic = Pic(250,140)
 # Creates a turret object
 gun = Gun(50, 50)
 
-# Creates restart button object
-restart = Restart()
-quit = Quit()
-
 # Boolean variable to have the player status to know if he's in the air
 flying = False
 
@@ -56,7 +52,7 @@ launched = True
 
 play = True
 win = False
-bullet = Bullet(120)
+bullet = Bullet()
 
 # Game loop
 while launched:
@@ -150,9 +146,6 @@ while launched:
             print("t mort")
             play=False
             break
-
-        # draw the life bar
-        player.update_health_bar(screen)
 
         # updates the screen
         pygame.display.flip()
