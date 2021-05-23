@@ -1,16 +1,9 @@
 //Imports and definitions for CP5
 import java.util.*;
 import controlP5.*;
-import processing.sound.*;
-import deadpixel.command.Command;
-Command cmd;
 ControlP5 cp5;
 DropdownList resolution, strafeLeft, strafeRight, Jump, strafeDown, launchMode;
 Slider Music, Sound;
-SoundFile file;
-
-static final String APP  = "python";
-static final String FILE = "main.py"; 
 
 //Variables Decralation 
 JSONObject settings;
@@ -28,13 +21,6 @@ void setup() {
   frameRate(60);    
   textAlign(CENTER);
 
-  //Command Preload
-  import deadpixel.command.Command;
-  Command cmd;
-  final String path = dataPath(FILE);
-  cmd = new Command(APP + path);
-  println(cmd.command);
- 
   //Image Preloading
   discord = loadImage("Assets/Discord.png");
   music = loadImage("Assets/Music.png");
@@ -42,20 +28,14 @@ void setup() {
   sound = loadImage("Assets/Sound.png");
   Xsound = loadImage("Assets/Xsound.png");
   back = loadImage("Assets/back.png");
-  
+
   //Settings File handeler
-  settings = loadJSONObject("settings.json");
+  settings = loadJSONObject("data/Jeu/settings.json");
   List res = Arrays.asList("864×576", "1080×720", "1152×768", "1350×900", "1620×1080", "2160×1440", "3240×2160"); //List of 3/2 Resolutions for the DropDown menu in settings. First one in the lise has index 0.0 and last one has index 6.0
   List UserEndKeys = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Space", "Arrow Left", "Arrow UP", "Arrow Down", "Arrow Right", "L Shift", "L Control");
   List BackEndKeys = Arrays.asList("K_a", "K_b", "K_c", "K_d", "K_e", "K_f", "K_g", "K_h", "K_i", "K_j", "K_k", "K_l", "K_m", "K_n", "K_o", "K_p", "K_q", "K_r", "K_s", "K_t", "K_u", "K_v", "K_w", "K_x", "K_y", "K_z", "K_SPACE", "K_LEFT", "K_UP", "K_DOWN", "K_RIGHT", "K_LSHIFT", "K_LCTRL");
   List LaunchModes = Arrays.asList("Compiled Mode", "Not Compiled Mode");
-  
-  //Music
-  file = new SoundFile(this, "music.mp3");
-  file.amp(0.08);
-  file.loop();
-  file.play();
-  
+
   //ControlP5 library initialisation
   cp5 = new ControlP5(this);
   PFont p = createFont("Arial", 16); //Font used in the settings
@@ -86,18 +66,7 @@ void setup() {
     .setOpen(true)
     .setCaptionLabel("Strafe Left :")
     ;
-  
-  //Dropdown menu for the launch type using ControlP5 Library
-  launchMode = cp5.addDropdownList("launch")
-    .addItems(LaunchModes)
-    .setPosition(25, 360)
-    .setSize(200, 120)
-    .setItemHeight(35)
-    .setBarHeight(40)
-    .setOpen(true)
-    .setCaptionLabel("Launch Mode")
-    ;
-  
+
   //Dropdown menu for Jump button and its settings using ControlP5 Library 
   Jump = cp5.addDropdownList("jump")
     .addItems(UserEndKeys)
@@ -108,7 +77,7 @@ void setup() {
     .setOpen(true)
     .setCaptionLabel("Jump :")
     ;
-  
+
   //Dropdown menu for Right movement and its settings using ControlP5 Library 
   strafeRight = cp5.addDropdownList("right")
     .addItems(UserEndKeys)
@@ -147,12 +116,12 @@ void setup() {
     .setRange(0, 100)
     .setValue(settings.getFloat("MusicVolume"))
     .setCaptionLabel(" Music Volume")
-    ;  
+    ;
 }
 
 void draw() {
   List BackEndKeys = Arrays.asList("K_a", "K_b", "K_c", "K_d", "K_e", "K_f", "K_g", "K_h", "K_i", "K_j", "K_k", "K_l", "K_m", "K_n", "K_o", "K_p", "K_q", "K_r", "K_s", "K_t", "K_u", "K_v", "K_w", "K_x", "K_y", "K_z", "K_SPACE", "K_LEFT", "K_UP", "K_DOWN", "K_RIGHT");
-  
+
   //On click release open the list (prevents the dropdown menu from closing themselves 
   resolution.onRelease(new CallbackListener() {
     public void controlEvent(CallbackEvent theEvent) {
@@ -184,16 +153,10 @@ void draw() {
     }
   }
   );
-  launchMode.onRelease(new CallbackListener() {
-    public void controlEvent(CallbackEvent theEvent) {
-      launchMode.setOpen(true);
-    }
-  }
-  );
-  
+
   //Submenu selector
   if (mode == "menu") {
-    background(0, 0, 0);
+    background(#1a1a1c);
     surface.setTitle("Don't keep calm, Just GIVE UP [Main Menu]");
 
     //Hide the controlP5 integration in the main menu
@@ -204,7 +167,6 @@ void draw() {
     strafeRight.hide();
     Jump.hide();
     strafeDown.hide();
-    launchMode.hide();
 
     //Play Button Drawing
     fill(50, 50, 50);
@@ -218,15 +180,9 @@ void draw() {
     //Play Button click action
     if (mouseX >= 30 && mouseX <= 300 && mouseY >= 30 && mouseY <= 135) {
       if (mousePressed == true) {
-        if (settings.getInt("launchMode") == 0){
-           exec(sketchPath("data/Jeu/Jeu.exe"));
-           delay(50);
-           exit();
-        } else {
-          cmd.run();
-          delay(50);
-          exit();
-        } 
+        exec(sketchPath("data/Jeu/Jeu.exe"));
+        delay(50);
+        exit();
       }
     }
 
@@ -253,12 +209,12 @@ void draw() {
     rect(100/3, 302, 800/3, 200/3, 10);
     fill(255);
     textSize(42);
-    text("Credits", 165, 353); 
+    text("Website", 165, 353); 
 
     //Credits button click action
     if (mouseX >= 30 && mouseX <= 300 && mouseY >= 300 && mouseY <= 370) {
       if (mousePressed == true) {
-        mode = "credits";
+        link("https://keep-calm.great-site.net/");
       }
     }
 
@@ -389,7 +345,7 @@ void draw() {
   //Settings Submenu
   if (mode == "settings") {
     clear();
-    background(0);
+    background(#1a1a1c);
     surface.setTitle("Don't keep calm, Just GIVE UP [Settings]");
 
     //Show the COntrolP5 items used for settings
@@ -400,7 +356,6 @@ void draw() {
     strafeRight.show();
     Jump.show();
     strafeDown.show();
-    launchMode.show();
 
     //Back Button
     fill(50, 50, 50);
@@ -417,14 +372,14 @@ void draw() {
     Mright = strafeRight.getValue();
     Mjump = Jump.getValue();
     Mdown = strafeDown.getValue();
-    
+
     //Converts the FLoat outputs of the CP5 Library to Int to use in order to use the "get()" function for saving the settings
     //ControlP5 uses lists to set the position in the dropdown Menu
     MleftInt = Math.round(Mleft);
     MrightInt = Math.round(Mright);
     MjumpInt = Math.round(Mjump);
     MdownInt = Math.round(Mdown);
-    
+
     //Back button click (Saves the settings)
     if (mouseX >= 800 && mouseX <= 870 && mouseY >= 500 && mouseY <= 570) {
       if (mousePressed == true) {
@@ -453,7 +408,7 @@ void draw() {
           settings.setInt("displayResWidth", 2160);
           settings.setInt("displayresHeight", 1440);
         }
-        
+
         //If sounds are different from the settings file, it will save them (saves CPU usage)
         if (SoundV != settings.getFloat("SoundsVolume")) {
           settings.setFloat("SoundsVolume", SoundV);
@@ -463,24 +418,21 @@ void draw() {
         }         
         if (BackEndKeys.get(MleftInt) != settings.getString("movementStrafeLeft")) {
           MleftStr = BackEndKeys.get(MleftInt).toString();
-          settings.setString("movementStrafeLeft", MleftStr); 
+          settings.setString("movementStrafeLeft", MleftStr);
         }  
         if (BackEndKeys.get(MrightInt) != settings.getString("movementStrafeRight")) {
           MrightStr = BackEndKeys.get(MrightInt).toString();
-          settings.setString("movementStrafeRight", MrightStr); 
+          settings.setString("movementStrafeRight", MrightStr);
         }  
         if (BackEndKeys.get(MjumpInt) != settings.getString("movementJump")) {
           MjumpStr = BackEndKeys.get(MjumpInt).toString();
-          settings.setString("movementJump", MjumpStr); 
+          settings.setString("movementJump", MjumpStr);
         }  
         if (BackEndKeys.get(MdownInt) != settings.getString("movementDown")) {
           MdownStr = BackEndKeys.get(MdownInt).toString();
-          settings.setString("movementDown", MdownStr); 
+          settings.setString("movementDown", MdownStr);
         } 
-        if (Math.round(launchMode.getValue()) != settings.getInt("launchMode")){
-          settings.setInt("launchMode", Math.round(launchMode.getValue()));
-        }
-        
+
         //Developpement Tests
         println("Resolution : ", settings.getInt("displayResWidth"), "x", settings.getInt("displayresHeight"));
         println("Volume Sons : ", SoundV, "%");
@@ -489,42 +441,9 @@ void draw() {
         println("Mouvement Jump : ", MrightStr);
         println("Mouvement Droite : ", MjumpStr);
         println("Mouvement bas : ", MdownStr);
-        println("Mode de lancement : ", launchMode.getValue());
-        
+
         saveJSONObject(settings, "settings.json");
       }
     }
-  }
-
-  //Credits Submenu (Not done yet)
-  if (mode == "credits") {
-    clear();
-    background(0);
-
-    //Back Button
-    fill(50, 50, 50);
-    stroke(183, 255, 250);
-    strokeWeight(5);
-    rect(800, 500, 70, 70, 10);
-    image(back, 790, 500, 80, 70);
-    if (mouseX >= 800 && mouseX <= 870 && mouseY >= 500 && mouseY <= 570) {
-      if (mousePressed == true) {
-        mode = "menu";
-      }
-    }
-    
-    //Website Button
-    fill(50, 50, 50);
-    stroke(183, 255, 250);
-    strokeWeight(5);
-    rect(30, 30, 250, 90, 10);
-    fill(255);
-    text("Website", 155, 95); 
-    if (mouseX >= 30 && mouseX <= 280 && mouseY >= 30 && mouseY <= 125) {
-      if (mousePressed == true) {
-        link("https://keep-calm.great-site.net/");
-      }
-    }
-    //Credits textzone
   }
 };
