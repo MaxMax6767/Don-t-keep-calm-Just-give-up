@@ -16,7 +16,7 @@ screen = pygame.display.set_mode((1080, 720))
 pygame.display.set_caption("Don't keep calm, Just give UP !")
 
 # Loads Background
-background = pygame.image.load('images/black.png')
+background = pygame.image.load(resource_path('images/black.png'))
 
 # Creates a variable for text color
 white_color = (255, 255, 255)
@@ -44,10 +44,6 @@ pic = Pic(250,140)
 # Creates a turret object
 gun = Gun(50, 50)
 
-# Creates restart button object
-restart = Restart()
-quit = Quit()
-
 # Boolean variable to have the player status to know if he's in the air
 flying = False
 
@@ -56,7 +52,7 @@ launched = True
 
 play = True
 win = False
-bullet = Bullet(120)
+bullet = Bullet()
 
 # Game loop
 while launched:
@@ -151,9 +147,6 @@ while launched:
             play=False
             break
 
-        # draw the life bar
-        player.update_health_bar(screen)
-
         # updates the screen
         pygame.display.flip()
 
@@ -175,7 +168,7 @@ while launched:
 
     # Exit point collisions
     if win == True:
-        gate.image = pygame.image.load('images/gate_open.jpg')
+        gate.image = pygame.image.load(resource_path('images/gate_open.jpg'))
         gate.image = pygame.transform.scale(gate.image, (120, 170))
         screen.blit(gate.image, gate.rect)
         screen.blit(texte_gagne, (300, 300))
@@ -208,7 +201,7 @@ while launched:
                 player.rect.y = 300
                 player.pressed = {}
                 player.life = player.beginn_life
-                gate.image = pygame.image.load('images/gate.jpg')
+                gate.image = pygame.image.load(resource_path('images/gate.jpg'))
                 gate.image = pygame.transform.scale(gate.image, (120,180))
                 win=False
                 continue

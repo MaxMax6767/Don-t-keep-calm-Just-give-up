@@ -19,7 +19,7 @@ def game4():
     pygame.display.set_caption("Don't keep calm, Just give UP !")
 
     # Loads Background
-    background = pygame.image.load('images/black.png')
+    background = pygame.image.load(resource_path('images/black.png'))
 
     # Creates a variable for text color
     white_color = (255, 255, 255)
@@ -156,7 +156,7 @@ def game4():
         end = time.time()+2
         # During 2 seconds we can see the door open and a win text
         while time.time()<end:
-            gate.image = pygame.image.load('images/gate_open.jpg')
+            gate.image = pygame.image.load(resource_path('images/gate_open.jpg'))
             gate.image = pygame.transform.scale(gate.image, (round(ScreenWidth/1080*120), round(ScreenHeight/720*180)))
             screen.blit(gate.image, gate.rect)
             screen.blit(texte_gagne, (round(ScreenWidth/1080*300), round(ScreenHeight/720*300)))

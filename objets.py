@@ -2,6 +2,7 @@ from bullet import *
 from Sounds import *
 from Setting import resolution
 
+#set variables for the screen resolution
 ScreenWidth = resolution()[0]
 ScreenHeight = resolution()[1]
 
@@ -12,7 +13,7 @@ class Wall(pygame.sprite.Sprite):
     def __init__(self, x, y, long, height):
         super().__init__()
         # Loads the image and resizes it
-        self.image = pygame.image.load('images/wall.jpg')
+        self.image = pygame.image.load(resource_path('images/wall.jpg'))
         self.image = pygame.transform.scale(self.image, (long, height))
         # Handles the screen coordinates
         self.rect = self.image.get_rect()
@@ -38,7 +39,7 @@ class Wall(pygame.sprite.Sprite):
             if self.compt % 2 == 0:
                 self.rect.x += 1
                 self.right = False
-                ##rect for collisions with the player
+                #rect for collisions with the player
                 self.rect_bottom = pygame.Rect(self.rect.x + 5, self.rect.y + self.height - 2, self.long - 10, 1)
                 self.rect_high = pygame.Rect(self.rect.x + 5, self.rect.y, self.long - 10, 1)
                 self.rect_left = pygame.Rect(self.rect.x + 5, self.rect.y + 5, 1, self.height - 10)
@@ -75,7 +76,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_velocity = round(ScreenHeight / 720 * 10.5)
         self.gravity = round(ScreenHeight / 720 * 1.9)
         # Image and coordinates
-        self.image = pygame.image.load('images/run_right/rr4.png')
+        self.image = pygame.image.load(resource_path('images/run_right/rr4.png'))
         self.image = pygame.transform.scale(self.image, (
             round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3 )))
         self.rect = self.image.get_rect()
@@ -102,12 +103,13 @@ class Player(pygame.sprite.Sprite):
     def MoveRightTouching(self):
         self.direction = "right"
         self.nbr_image_right2 = str(self.nbr_image_right2)
-        self.image = pygame.image.load(('images/run_right/rr' + self.nbr_image_right2 + '.png'))
+        self.image = pygame.image.load(resource_path(('images/run_right/rr' + self.nbr_image_right2 + '.png')))
         self.image = pygame.transform.scale(self.image, (
             round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3 )))
         self.rect.x += self.velocity
         self.nbr_image_right += 1
 
+        # change images for the mouvements
         if self.nbr_image_right == 50:
             self.nbr_image_right = 0
         else:
@@ -116,7 +118,7 @@ class Player(pygame.sprite.Sprite):
     # Right when player is flying
     def MoveRight(self):
         self.direction = "right"
-        self.image = pygame.image.load('images/jr.png')
+        self.image = pygame.image.load(resource_path('images/jr.png'))
         self.image = pygame.transform.scale(self.image, (
             round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] / 3)))
         self.rect.x += self.velocity
@@ -125,12 +127,13 @@ class Player(pygame.sprite.Sprite):
     def MoveLeftTouching(self):
         self.direction = "left"
         self.nbr_image_left2 = str(self.nbr_image_left2)
-        self.image = pygame.image.load('images/run_left/rl' + self.nbr_image_left2 + '.png')
+        self.image = pygame.image.load(resource_path('images/run_left/rl' + self.nbr_image_left2 + '.png'))
         self.image = pygame.transform.scale(self.image, (
             round(ScreenWidth/1080*self.image.get_rect().size[0]/3), round(ScreenHeight/720*self.image.get_rect().size[1]/3)))
         self.rect.x -= self.velocity
         self.nbr_image_left += 1
 
+        #change images for the mouvements
         if self.nbr_image_left == 50:
             self.nbr_image_left = 0
         else:
@@ -139,14 +142,14 @@ class Player(pygame.sprite.Sprite):
     # Left when player is flying
     def MoveLeft(self):
         self.direction = "left"
-        self.image = pygame.image.load('images/jl.png')
+        self.image = pygame.image.load(resource_path('images/jl.png'))
         self.image = pygame.transform.scale(self.image, (
             round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1]/3)))
         self.rect.x -= self.velocity
 
     # Up
     def MoveUp(self):
-        self.image = pygame.image.load('images/jl.png')
+        self.image = pygame.image.load(resource_path('images/jl.png'))
         self.image = pygame.transform.scale(self.image, (
             round(ScreenWidth/1080*self.image.get_rect().size[0] / 3), round(ScreenHeight/720*self.image.get_rect().size[1] /3)))
         self.move_up_nbr2 += 1
@@ -169,7 +172,7 @@ class Gate(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         # Load image and coordinates
-        self.image = pygame.image.load('images/gate.jpg')
+        self.image = pygame.image.load(resource_path('images/gate.jpg'))
         self.image = pygame.transform.scale(self.image, (120, 180))
         self.image = pygame.transform.scale(self.image,
                                             (round(ScreenWidth / 1080 * 120), round(ScreenHeight / 720 * 180)))
@@ -179,7 +182,7 @@ class Gate(pygame.sprite.Sprite):
 
     # Collision with player
     def Collid(self):
-        self.image = pygame.image.load('images/gate_open.jpg')
+        self.image = pygame.image.load(resource_path('images/gate_open.jpg'))
         self.image = pygame.transform.scale(self.image,
                                             (round(ScreenWidth / 1080 * 120), round(ScreenHeight / 720 * 180)))
         # Sound of the door
@@ -192,7 +195,7 @@ class Pic(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         # Load image and coordinates
-        self.image = pygame.image.load('images/pic.jpg')
+        self.image = pygame.image.load(resource_path('images/pic.jpg'))
         self.image = pygame.transform.scale(self.image,
                                             (round(ScreenWidth / 1080 * 50), round(ScreenHeight / 720 * 30)))
         self.rect = self.image.get_rect()
@@ -213,6 +216,7 @@ class Pic(pygame.sprite.Sprite):
 
     #Pic can move with this function
     def Move(self, v):
+        # go right
         if self.rect.x < self.x + 200 and self.left == True:
             self.compt += 1
             if self.compt % v == 0:
@@ -222,6 +226,7 @@ class Pic(pygame.sprite.Sprite):
         elif self.rect.x == self.x + 200:
             self.right = True
 
+        # go left
         if self.right == True and self.rect.x > self.x:
             self.compt += 1
             if self.compt % v == 0:
@@ -238,7 +243,7 @@ class Gun(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         # Load image and coordinates
-        self.image = pygame.image.load('images/gun.png')
+        self.image = pygame.image.load(resource_path('images/gun.png'))
         self.image = pygame.transform.scale(self.image, (100, 90))
         self.rect = self.image.get_rect()
         self.rect.x = 20
