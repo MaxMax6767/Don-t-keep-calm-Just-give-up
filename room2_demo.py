@@ -1,7 +1,8 @@
 from objets import *
 from functions import *
 import time
-
+import sys
+import os
 
 def game2():
     # Starts the Pygame Library
@@ -12,7 +13,7 @@ def game2():
     pygame.display.set_caption("Don't keep calm, Just give UP !")
 
     # Loads Background
-    background = pygame.image.load('images/black.png')
+    background = pygame.image.load(resource_path('images/black.png'))
 
     # Creates a variable for text color
     white_color = (255, 255, 255)
@@ -145,7 +146,7 @@ def game2():
         end = time.time()+2
         # During 2 seconds we can see the door open and a win text
         while time.time()<end:
-            gate.image = pygame.image.load('images/gate_open.jpg')
+            gate.image = pygame.image.load(resource_path('images/gate_open.jpg'))
             gate.image = pygame.transform.scale(gate.image, (120, 180))
             screen.blit(gate.image, gate.rect)
             screen.blit(texte_gagne, (300, 300))

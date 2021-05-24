@@ -18,7 +18,7 @@ def game9():
     pygame.display.set_caption("Don't keep calm, Just give UP !")
 
     # Loads Background
-    background = pygame.image.load('images/black.png')
+    background = pygame.image.load(resource_path('images/black.png'))
 
     # Creates a variable for text color
     white_color = (255, 255, 255)
@@ -31,7 +31,7 @@ def game9():
     texte_trap = arial_font.render("It's a Trap ", True, white_color)
     texte_trap2 = arial_font.render("The door is hidden", True, white_color)
 
-    emoji = pygame.image.load('images/smiley joy.png')
+    emoji = pygame.image.load(resource_path('images/smiley joy.png'))
 
     # Creates an object for the Player
     player = Player()
@@ -47,7 +47,7 @@ def game9():
     # creates a False door object
     Fgate = Gate(round(ScreenWidth / 1080 * 930), round(ScreenHeight / 720 * 550))
     gate = Gate(round(ScreenWidth / 1080 * 1000), round(ScreenHeight / 720 * 320))
-    gate.image = pygame.image.load('images/black.png')
+    gate.image = pygame.image.load(resource_path('images/black.png'))
     gate.image = pygame.transform.scale(gate.image, (round(ScreenWidth / 1080 * 150), round(ScreenHeight / 720 * 150)))
     Fgate_collid = False
     gate_collid = False
@@ -189,7 +189,7 @@ def game9():
         end = time.time() + 2
         # During 2 seconds we can see the door open and a win text
         while time.time() < end:
-            gate.image = pygame.image.load('images/gate_open.jpg')
+            gate.image = pygame.image.load(resource_path('images/gate_open.jpg'))
             gate.image = pygame.transform.scale(gate.image,
                                                 (round(ScreenWidth / 1080 * 120), round(ScreenHeight / 720 * 180)))
             screen.blit(gate.image, gate.rect)

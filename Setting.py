@@ -1,8 +1,19 @@
 import json
 import pygame
+import sys
+import os
+
+def resource_path(relative_path):
+    try:
+    # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 # Dumps content from json file to a list
-with open("settings.json", "r") as r:
+with open(resource_path("settings.json"), "r") as r:
     data = json.load(r)
 
 

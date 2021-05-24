@@ -1,7 +1,17 @@
 import pygame
 from Setting import resolution
 from Setting import moveLeft, moveDown, moveRight, moveUp
+import sys
+import os
 
+def resource_path(relative_path):
+    try:
+    # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 # Syntax simplification for resolution
 ScreenWidth = resolution()[0]
@@ -23,10 +33,10 @@ def mouvements(player, wall, wall_bas, wall_porte, wall3):
         else:
             # Images of the player
             if player.direction == "left":
-                player.image = pygame.image.load('images/run_left/rl4.png')
+                player.image = pygame.image.load(resource_path('images/run_left/rl4.png'))
                 player.image = pygame.transform.scale(player.image, (round(ScreenWidth/1080*100),round(ScreenHeight/720*100)))
             else:
-                player.image = pygame.image.load('images/run_right/rr4.png')
+                player.image = pygame.image.load(resource_path('images/run_right/rr4.png'))
                 player.image = pygame.transform.scale(player.image, (round(ScreenWidth/1080*100), round(ScreenHeight/720*100)))
 
     # right movement for right key pressed except if there's a wall on the right
