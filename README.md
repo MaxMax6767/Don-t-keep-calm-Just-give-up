@@ -62,11 +62,7 @@ Jeu style *Give UP* : **Die & Retry**
          * [x] Pics
          * [x] Personnage
 
-- Matteo M : 
-    - Site Web :
-         * [x] SSL à jour
-         * [x] Barre Progression
-         * [x] Sécurité
+- Matteo M :
     - Sons & Musiques :
          * [x] Musique Principale
          * [x] Son de porte
@@ -94,8 +90,9 @@ Jeu style *Give UP* : **Die & Retry**
          * [x] Porte 
 - Maxime G : 
     - Launcher : 
+         * Lancement Jeu
          * Parametres :
-              - [x] Mouvements
+              - [x] Mouvements (Touches)
               - [x] Résolution
               - [x] Son
               - [x] Musique
@@ -107,6 +104,10 @@ Jeu style *Give UP* : **Die & Retry**
          * [x] Controles
          * [x] Résolution
          * [x] Gestion du son & Musique
+    - Site Web :
+         * [x] SSL à jour
+         * [x] Barre Progression
+         * [x] Sécurité
     - **Fusion Projet**
 
 
